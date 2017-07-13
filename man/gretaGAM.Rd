@@ -4,7 +4,7 @@
 \name{gretaGAM}
 \alias{gretaGAM}
 \alias{gretaGAM-package}
-\title{gretaGAM: generalised Additive Models in greta using mgcv}
+\title{gretaGAM: generalised additive models in greta using mgcv}
 \description{
 gretaGAM is a module for greta that lets you use mgcv's smoother
   functions and formula syntax to define smooth terms for use in a greta

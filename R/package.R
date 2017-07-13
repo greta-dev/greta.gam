@@ -1,4 +1,4 @@
-#' gretaGAM: generalised Additive Models in greta using mgcv
+#' gretaGAM: generalised additive models in greta using mgcv
 #' @name gretaGAM
 #'
 #' @description gretaGAM is a module for greta that lets you use mgcv's smoother

@@ -2,3 +2,4 @@
 
 import(greta)
 import(mgcv)
+importFrom(mgcv,gam)
