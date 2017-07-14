@@ -2,4 +2,6 @@
 
 import(greta)
 import(mgcv)
-importFrom(mgcv,gam)
+importFrom(mgcv,jagam)
+importFrom(stats,gaussian)
+importFrom(stats,update)
