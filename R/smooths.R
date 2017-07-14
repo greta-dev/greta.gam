@@ -45,6 +45,40 @@
 #'   MCMC to carry out this integration - it does not make sense to do maximum
 #'   likelihood optimisation on a greta model that uses \code{smooths}.
 #'
+#'
+#' @examples
+#' \dontrun{
+#' x <- runif(n, 0, 10)
+#' f <- function(x) {
+#'   sin(x * 2) + 1.6 * (x < 3) - 1.4 * (x > 7)
+#' }
+#' y <- f(x) + rnorm(n, 0, 0.3)
+#' x_plot <- seq(0, 10, length.out = 200)
+#'
+#' library(greta)
+#' library(gretaGAM)
+#'
+#' jg <- smooths(~s(x), data=data.frame(x=x), newdata=data.frame(x=x_plot))
+#'
+#' k <- 20
+#'
+#' z <- with(jg, X %*% betas)
+#'
+#' distribution(y) = normal(z, 0.3)# sd)
+#'
+#'
+#' z_pred <- with(jg, X_pred %*% betas)
+#'
+#' # build model
+#' m <- model(z_pred)
+#' draws <- mcmc(m, n_samples = 100)
+#'
+#'
+#' plot(x,y, pch=19, cex=0.4, col="red")
+#' apply(draws[[1]], 1, lines, x=x_plot, col="blue")
+#' points(x,y, pch=19, cex=0.4, col="red")
+#'
+#'}
 smooths <- function (formula, data = list(), knots = NULL, sp = NULL, newdata) {
 
   if (length(formula) > 2) {
