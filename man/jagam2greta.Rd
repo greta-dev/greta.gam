@@ -26,6 +26,9 @@ numeric vector or a greta array (which could be a variable).}
 used for basis construction, as in \code{\link[mgcv:gam]{mgcv::gam}} These
 knots cannot be greta arrays.}
 }
+\value{
+a \code{list} with the following elements: \code{betas} a greta array for the coefficients to be estimated (with appropriate priors applied), \code{X} design matrix for this model, \code{X_pred} prediction matrix.
+}
 \description{
 Takes a GAM defined by \code{formula} and returns the corresponding \code{greta} model via the power of \code{jagam}. Response variable is generated from dummy data and not used.
 }

@@ -6,6 +6,8 @@
 #'
 #' @importFrom mgcv jagam
 #' @importFrom stats gaussian update
+#'
+#' @return a \code{list} with the following elements: \code{betas} a greta array for the coefficients to be estimated (with appropriate priors applied), \code{X} design matrix for this model, \code{X_pred} prediction matrix.
 jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL){
 
 
@@ -22,6 +24,9 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL){
                             file=textConnection("jags_spec", open="a",
                                                 local=TRUE))
 
+  if(!is.null(jags_stuff$jags.data$offset)){
+    warning("Offsets are not directly handled, remember to write them into your linear predictor!")
+  }
 
   # this is the design matrix for EVERYTHING (not per smooth)
   # need to think about this more carefully for multiple smooths?
