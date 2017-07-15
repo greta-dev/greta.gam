@@ -79,6 +79,7 @@
 #' points(x,y, pch=19, cex=0.4, col="red")
 #'
 #'}
+#' @export
 smooths <- function (formula, data = list(), knots = NULL, sp = NULL, newdata) {
 
   if (length(formula) > 2) {
