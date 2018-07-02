@@ -25,7 +25,11 @@
 #'   must be specified by the user. The smoothing parameters may either be a
 #'   numeric vector or a greta array (which could be a variable).
 #'
-#' @param newdata new data to use for predictions etc (this probably doesn't likve here but is supplied for now for testing)
+#' @param newdata new data to use for predictions etc (this probably doesn't
+#'   likve here but is supplied for now for testing)
+#'
+#' @param tol a non-negative scalar numerical tolerance parameter. You can try
+#'   increasing this if the model has numerical stability issues
 #'
 #' @details Only the right hand side of \code{formula} will be used to define
 #'   the smooth terms. The user must complete the gam model by specifying the
@@ -48,6 +52,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' n <- 30
 #' x <- runif(n, 0, 10)
 #' f <- function(x) {
 #'   sin(x * 2) + 1.6 * (x < 3) - 1.4 * (x > 7)
@@ -77,7 +82,7 @@
 #'
 #'}
 #' @export
-smooths <- function (formula, data = list(), knots = NULL, sp = NULL, newdata) {
+smooths <- function (formula, data = list(), knots = NULL, sp = NULL, newdata = data, tol = 0) {
 
   if (length(formula) > 2) {
     warning ("the formula has a left hand side, only the right hand side ",
@@ -85,9 +90,10 @@ smooths <- function (formula, data = list(), knots = NULL, sp = NULL, newdata) {
              call. = FALSE)
   }
 
-
   jg <- jagam2greta(formula,
-                    data=data, newdata=newdata)
+                    data=data,
+                    newdata=newdata,
+                    tol = tol)
 
   return(jg)
 }

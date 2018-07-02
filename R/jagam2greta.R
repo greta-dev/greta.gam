@@ -8,7 +8,7 @@
 #' @importFrom stats gaussian update
 #'
 #' @return a \code{list} with the following elements: \code{betas} a greta array for the coefficients to be estimated (with appropriate priors applied), \code{X} design matrix for this model, \code{X_pred} prediction matrix.
-jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL){
+jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
 
 
   # make a dummy response to get jagam to work
@@ -52,6 +52,11 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL){
     assign(thisK, with(jags_stuff$jags.data, eval(parse(text=Kthings[i]))))
     # solve line
     assign(thisK, solve(get(paste0("K", Ktosolve[i]))))
+
+    # add optional jitter
+    if (tol > 0) {
+      assign(thisK, get(thisK) + diag(nrow(get(thisK))) * tol)
+    }
     # prior on betas
     # beta <- t(multivariate_normal(zeros(dim), K))
     assign(paste0("b", Ktosolve[i]),

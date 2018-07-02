@@ -4,7 +4,8 @@
 \alias{smooths}
 \title{greta array representations of mgcv smooth terms}
 \usage{
-smooths(formula, data = list(), knots = NULL, sp = NULL, newdata)
+smooths(formula, data = list(), knots = NULL, sp = NULL, newdata = data,
+  tol = 0)
 }
 \arguments{
 \item{formula}{a GAM formula representing the smooth terms, as in
@@ -24,7 +25,11 @@ smoothing parameters will be learned, otherwise all smoothing parameters
 must be specified by the user. The smoothing parameters may either be a
 numeric vector or a greta array (which could be a variable).}
 
-\item{newdata}{new data to use for predictions etc (this probably doesn't likve here but is supplied for now for testing)}
+\item{newdata}{new data to use for predictions etc (this probably doesn't
+likve here but is supplied for now for testing)}
+
+\item{tol}{a non-negative scalar numerical tolerance parameter. You can try
+increasing this if the model has numerical stability issues}
 }
 \description{
 \code{smooths} translates the right hand side of a mgcv GAM
@@ -54,6 +59,7 @@ Only the right hand side of \code{formula} will be used to define
 }
 \examples{
 \dontrun{
+n <- 30
 x <- runif(n, 0, 10)
 f <- function(x) {
   sin(x * 2) + 1.6 * (x < 3) - 1.4 * (x > 7)
