@@ -55,9 +55,6 @@
 #' y <- f(x) + rnorm(n, 0, 0.3)
 #' x_plot <- seq(0, 10, length.out = 200)
 #'
-#' library(greta)
-#' library(gretaGAM)
-#'
 #' jg <- smooths(~s(x), data=data.frame(x=x), newdata=data.frame(x=x_plot))
 #'
 #' k <- 20

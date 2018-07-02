@@ -1,8 +1,8 @@
-## gretaGAM
+## greta.gam
 
 #### Generalised additive models in greta using mgcv.
 
-gretaGAM lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)'s smoother functions and formula syntax to define smooth terms for use in a [greta](https://goldingn.github.io/greta) model.
+greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)'s smoother functions and formula syntax to define smooth terms for use in a [greta](https://greta-dev.github.io/greta) model.
 You can then define your own likelihood to complete the model, and fit it by MCMC.
 
 This is work in progress and is not yet ready for use!
@@ -12,7 +12,7 @@ More details and examples will follow.
 
 #### Brief technical details
 
-`gretaGAM` uses a few tricks from the `jagam` routine in `mgcv` to get things to work. Here are some brief details for those interested in the internal workings...
+`greta.gam` uses a few tricks from the `jagam` routine in `mgcv` to get things to work. Here are some brief details for those interested in the internal workings...
 
 **Bayesian interpretation of the GAM**: GAMs are, of course, Bayesian models. One can think of the smoother penalty matrix as a prior covariance matrix (they are inverses of each other) in a Bayesian random effects model. Design matrices are constructed exactly as in the frequentist case.
 

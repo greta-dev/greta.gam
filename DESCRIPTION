@@ -1,4 +1,4 @@
-Package: gretaGAM
+Package: greta.gam
 Type: Package
 Title: Generalised Additive Models in greta using mgcv
 Version: 0.1.0
