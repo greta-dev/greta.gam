@@ -33,8 +33,8 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
   X <- jags_stuff$jags.data$X
 
   # do something smart with smoothing parameters
-  if(is.null(sp)){
-    sp <- gamma(0.05, 1/0.005, dim = 2*length(jags_stuff$pregam$smooth))
+  if (is.null(sp)) {
+    sp <- gamma(0.05, 1 / 0.005, dim = 2 * length(jags_stuff$pregam$smooth))
   }
 
   # placeholder for X_pred
@@ -45,7 +45,7 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
   Kthings <- jags_spec[grepl("^  K", jags_spec)]
   Kthings <- gsub("lambda", "sp", Kthings)
   Ktosolve <- sub("^  K(\\d+).*", "\\1", Kthings)
-  for(i in seq_along(Kthings)){
+  for (i in seq_along(Kthings)) {
 
     thisK <- paste0("K", Ktosolve[i])
     # run the K <- S[]*sp[1] + S[]*sp[2] line
@@ -60,7 +60,7 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
     # prior on betas
     # beta <- t(multivariate_normal(zeros(dim), K))
     assign(paste0("b", Ktosolve[i]),
-           t(multivariate_normal(zeros(jags_stuff$pregam$smooth[[1]]$df),
+           t(multivariate_normal(zeros(1, jags_stuff$pregam$smooth[[1]]$df),
                                  get(thisK))))
     # put the betas together
     if(i == 1){
