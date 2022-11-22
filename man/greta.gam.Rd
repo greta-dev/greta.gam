@@ -3,7 +3,6 @@
 \docType{package}
 \name{greta.gam}
 \alias{greta.gam}
-\alias{greta.gam-package}
 \title{greta.gam: generalised additive models in greta using mgcv}
 \description{
 greta.gam is a module for greta that lets you use mgcv's smoother
