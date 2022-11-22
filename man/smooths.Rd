@@ -4,8 +4,7 @@
 \alias{smooths}
 \title{greta array representations of mgcv smooth terms}
 \usage{
-smooths(formula, data = list(), knots = NULL, sp = NULL, newdata = data,
-  tol = 0)
+smooths(formula, data = list(), knots = NULL, sp = NULL, tol = 0)
 }
 \arguments{
 \item{formula}{a GAM formula representing the smooth terms, as in
@@ -24,9 +23,6 @@ the model, in the same order as the formula. If \code{sp = NULL}, all
 smoothing parameters will be learned, otherwise all smoothing parameters
 must be specified by the user. The smoothing parameters may either be a
 numeric vector or a greta array (which could be a variable).}
-
-\item{newdata}{new data to use for predictions etc (this probably doesn't
-likve here but is supplied for now for testing)}
 
 \item{tol}{a non-negative scalar numerical tolerance parameter. You can try
 increasing this if the model has numerical stability issues}
@@ -67,25 +63,18 @@ f <- function(x) {
 y <- f(x) + rnorm(n, 0, 0.3)
 x_plot <- seq(0, 10, length.out = 200)
 
-jg <- smooths(~s(x), data=data.frame(x=x), newdata=data.frame(x=x_plot))
+z <- smooths(~s(x), data = data.frame(x = x))
 
-k <- 20
+distribution(y) <- normal(z, 0.3)
 
-z <- with(jg, X \%*\% betas)
-
-distribution(y) = normal(z, 0.3)# sd)
-
-
-z_pred <- with(jg, X_pred \%*\% betas)
+z_pred <- evaluate_smooths(z, newdata = data.frame(x = x_plot))
 
 # build model
 m <- model(z_pred)
 draws <- mcmc(m, n_samples = 100)
 
-
-plot(x,y, pch=19, cex=0.4, col="red")
-apply(draws[[1]], 1, lines, x=x_plot, col="blue")
-points(x,y, pch=19, cex=0.4, col="red")
-
+plot(x, y, pch = 19, cex = 0.4, col = "red")
+apply(draws[[1]], 1, lines, x = x_plot, col = "blue")
+points(x, y, pch = 19, cex = 0.4, col = "red")
 }
 }

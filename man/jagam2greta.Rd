@@ -14,9 +14,6 @@ will be used.}
 \item{data}{a data frame or list containing the covariates required by the
 formula. These covariates cannot be greta arrays.}
 
-\item{newdata}{new data to use for predictions etc (this probably doesn't
-likve here but is supplied for now for testing)}
-
 \item{sp}{an optional vector of smoothing parameters, two per smooth term in
 the model, in the same order as the formula. If \code{sp = NULL}, all
 smoothing parameters will be learned, otherwise all smoothing parameters

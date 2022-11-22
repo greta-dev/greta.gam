@@ -37,9 +37,6 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
     sp <- gamma(0.05, 1 / 0.005, dim = 2 * length(jags_stuff$pregam$smooth))
   }
 
-  # placeholder for X_pred
-  X_pred <- c()
-
   # get all the penalties, form them (because of proper priorness), then
   # turn them into vcov matrices via solve()
   Kthings <- jags_spec[grepl("^  K", jags_spec)]
@@ -68,17 +65,14 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
     }else{
       betas <- c(betas, get(paste0("b", Ktosolve[i])))
     }
-    # make X_pred
-    X_pred <- cbind(X_pred, PredictMat(jags_stuff$pregam$smooth[[i]], newdata))
   }
 
   # do intercept stuff
-  X_pred <- cbind(1, X_pred)
   int <- normal(0, 1.3)
 
   # put all the betas together
   betas <- c(int, betas)
 
-  return(list(betas=betas, X=X, X_pred=X_pred))
+  return(list(betas = betas, X = X, smooth_list = jags_stuff$pregam$smooth))
 }
 
