@@ -2,4 +2,4 @@ library(testthat)
 library(greta)
 library(mgcv)
 
-test_check("gretaGAM")
+test_check("greta.gam")
