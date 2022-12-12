@@ -60,7 +60,7 @@ z_pred <- evaluate_smooths(z, newdata = pred_dat)
 m <- model(z_pred)
 
 # draw from the posterior
-draws <- mcmc(m, n_samples = 200, one_by_one=TRUE)
+draws <- mcmc(m, n_samples = 200)
 
 # plot the mgcv fit
 plot(b, scheme=1, shift=coef(b)[1])
