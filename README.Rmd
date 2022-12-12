@@ -1,3 +1,16 @@
+---
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 ## greta.gam
 
 ### Generalised additive models in greta using mgcv.

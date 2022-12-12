@@ -1,3 +1,10 @@
+---
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+
 ## greta.gam
 
 ### Generalised additive models in greta using mgcv.
@@ -17,28 +24,12 @@ In `mgcv`:
 
 ```r
 library(mgcv)
-```
-
-```
-## Loading required package: nlme
-```
-
-```
-## This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.
-```
-
-```r
 set.seed(2)
 
 # simulate some data...
 dat <- gamSim(1, n=400, dist="normal", scale=0.3)
-```
+#> Gu & Wahba 4 term additive model
 
-```
-## Gu & Wahba 4 term additive model
-```
-
-```r
 # fit a model using gam()
 b <- gam(y~s(x2), data=dat)
 ```
@@ -48,43 +39,11 @@ Now fitting the same model in `greta`:
 
 ```r
 library(greta)
-```
-
-```
-## 
-## Attaching package: 'greta'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     binomial, cov2cor, poisson
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     %*%, apply, backsolve, beta, chol2inv, colMeans, colSums, diag,
-##     eigen, forwardsolve, gamma, identity, rowMeans, rowSums, sweep,
-##     tapply
-```
-
-```r
 library(greta.gam)
 
 # setup the linear predictor for the smooth
 z <- smooths(~s(x2), data = dat)
-```
 
-```
-## ℹ Initialising python and checking dependencies, this may take a moment.[K
-```
-
-```
-## ✔ Initialising python and checking dependencies ... done![K
-```
-
-```r
 # set the distribution of the response
 distribution(dat$y) <- normal(z, 1)
 
@@ -99,30 +58,14 @@ m <- model(z_pred)
 
 # draw from the posterior
 draws <- mcmc(m, n_samples = 200, one_by_one=TRUE)
-```
 
-```
-## running 4 chains simultaneously on up to 8 cores
-```
-
-```
-##     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 41s              warmup ====                                    100/1000 | eta: 29s              warmup ======                                  150/1000 | eta: 25s              warmup ========                                200/1000 | eta: 22s              warmup ==========                              250/1000 | eta: 19s              warmup ===========                             300/1000 | eta: 17s              warmup =============                           350/1000 | eta: 15s              warmup ===============                         400/1000 | eta: 14s              warmup =================                       450/1000 | eta: 13s              warmup ===================                     500/1000 | eta: 12s              warmup =====================                   550/1000 | eta: 11s              warmup =======================                 600/1000 | eta: 10s              warmup =========================               650/1000 | eta:  8s              warmup ===========================             700/1000 | eta:  7s              warmup ============================            750/1000 | eta:  6s              warmup ==============================          800/1000 | eta:  5s              warmup ================================        850/1000 | eta:  4s              warmup ==================================      900/1000 | eta:  2s              warmup ====================================    950/1000 | eta:  1s              warmup ====================================== 1000/1000 | eta:  0s          
-##   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  6s            sampling ===================                      100/200 | eta:  4s            sampling ============================             150/200 | eta:  2s            sampling ======================================   200/200 | eta:  0s
-```
-
-```r
 # plot the mgcv fit
 plot(b, scheme=1, shift=coef(b)[1])
 
 # add in a line for each posterior sample
 apply(draws[[1]], 1, lines, x = pred_dat$x2, col = "blue")
-```
+#> NULL
 
-```
-## NULL
-```
-
-```r
 # plot the data
 points(dat$x2, dat$y, pch = 19, cex = 0.2)
 ```
