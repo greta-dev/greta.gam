@@ -14,7 +14,8 @@ Description: A module for greta that lets you use mgcv's smoother functions
 License: GPL(>=2) 
 Imports: 
     cli,
-    mgcv
+    mgcv,
+    rlang
 Depends: greta
 Suggests: 
     testthat (>= 3.0.0)
