@@ -73,14 +73,8 @@
 #' }
 #' @export
 smooths <- function(formula, data = list(), knots = NULL, sp = NULL, tol = 0) {
-  if (length(formula) > 2) {
-    cli::cli_warn(
-      c(
-        "Formula has a left hand side",
-        "Only the right hand side will be used to define the smooth"
-      )
-    )
-  }
+
+  warn_if_formula_has_lhs(formula)
 
   # get all the MGCV objects for Bayesian version, converted to greta arrays
   jg <- jagam2greta(formula,
