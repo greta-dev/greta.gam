@@ -12,7 +12,11 @@ jagam2greta <- function(formula, data, newdata, sp = NULL, knots = NULL, tol = 0
   # make a dummy response to get jagam to work
   formula <- update(formula, dummy ~ .)
   if ("dummy" %in% colnames(data)) {
-    stop("Already a dummy column in data, rename it!")
+    cli::cli_abort(
+      c(
+        "Already a dummy column in data, rename it!"
+      )
+    )
   }
   data$dummy <- rep(1, nrow(data))
 
@@ -27,7 +31,12 @@ jagam2greta <- function(formula, data, newdata, sp = NULL, knots = NULL, tol = 0
   )
 
   if (!is.null(jags_stuff$jags.data$offset)) {
-    warning("Offsets are not directly handled, remember to write them into your linear predictor!")
+    cli::cli_warn(
+      c(
+        "Offsets are not directly handled",
+        "Remember to write them into your linear predictor!"
+      )
+    )
   }
 
   # this is the design matrix for EVERYTHING (not per smooth)

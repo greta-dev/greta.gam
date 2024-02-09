@@ -12,8 +12,11 @@
 evaluate_smooths <- function(x, newdata) {
   info <- attr(x, "smooth_info")
   if (is.null(info)) {
-    stop("can only evaluate smooths from greta arrays created with greta.gam::smooths",
-      call. = FALSE
+    cli::cli_abort(
+      c(
+        "Can only evaluate smooths from greta arrays created with \\
+        {.fn greta.gam::smooths}"
+      )
     )
   }
 

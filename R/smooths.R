@@ -74,9 +74,11 @@
 #' @export
 smooths <- function(formula, data = list(), knots = NULL, sp = NULL, tol = 0) {
   if (length(formula) > 2) {
-    warning("the formula has a left hand side, only the right hand side ",
-      "will be used to define the smooth",
-      call. = FALSE
+    cli::cli_warn(
+      c(
+        "Formula has a left hand side",
+        "Only the right hand side will be used to define the smooth"
+      )
     )
   }
 
