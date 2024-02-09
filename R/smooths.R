@@ -57,7 +57,7 @@
 #' y <- f(x) + rnorm(n, 0, 0.3)
 #' x_plot <- seq(0, 10, length.out = 200)
 #'
-#' z <- smooths(~s(x), data = data.frame(x = x))
+#' z <- smooths(~ s(x), data = data.frame(x = x))
 #'
 #' distribution(y) <- normal(z, 0.3)
 #'
@@ -70,20 +70,16 @@
 #' plot(x, y, pch = 19, cex = 0.4, col = "red")
 #' apply(draws[[1]], 1, lines, x = x_plot, col = "blue")
 #' points(x, y, pch = 19, cex = 0.4, col = "red")
-#'}
+#' }
 #' @export
-smooths <- function (formula, data = list(), knots = NULL, sp = NULL, tol = 0) {
-
-  if (length(formula) > 2) {
-    warning ("the formula has a left hand side, only the right hand side ",
-             "will be used to define the smooth",
-             call. = FALSE)
-  }
+smooths <- function(formula, data = list(), knots = NULL, sp = NULL, tol = 0) {
+  warn_if_formula_has_lhs(formula)
 
   # get all the MGCV objects for Bayesian version, converted to greta arrays
   jg <- jagam2greta(formula,
-                    data=data,
-                    tol = tol)
+    data = data,
+    tol = tol
+  )
 
   # evaluate the smooths at the initial data
   eta <- with(jg, X %*% betas)
@@ -92,5 +88,4 @@ smooths <- function (formula, data = list(), knots = NULL, sp = NULL, tol = 0) {
   attr(eta, "smooth_info") <- jg
 
   return(eta)
-
 }

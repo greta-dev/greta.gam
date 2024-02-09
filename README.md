@@ -30,17 +30,18 @@ library(mgcv)
 set.seed(2)
 
 # simulate some data...
-dat <- gamSim(1, n=400, dist="normal", scale=0.3)
+dat <- gamSim(1, n = 400, dist = "normal", scale = 0.3)
 #> Gu & Wahba 4 term additive model
 
 # fit a model using gam()
-b <- gam(y~s(x2), data=dat)
+b <- gam(y ~ s(x2), data = dat)
 ```
 
 Now fitting the same model in `greta`:
 
 ``` r
-library(greta)
+library(greta.gam)
+#> Loading required package: greta
 #> 
 #> Attaching package: 'greta'
 #> The following objects are masked from 'package:stats':
@@ -51,10 +52,9 @@ library(greta)
 #>     %*%, apply, backsolve, beta, chol2inv, colMeans, colSums, diag,
 #>     eigen, forwardsolve, gamma, identity, rowMeans, rowSums, sweep,
 #>     tapply
-library(greta.gam)
-set.seed(2024-02-09)
+set.seed(2024 - 02 - 09)
 # setup the linear predictor for the smooth
-z <- smooths(~s(x2), data = dat)
+z <- smooths(~ s(x2), data = dat)
 #> ℹ Initialising python and checking dependencies, this may take a moment.
 #> ✔ Initialising python and checking dependencies ... done!               
 
@@ -62,7 +62,7 @@ z <- smooths(~s(x2), data = dat)
 distribution(dat$y) <- normal(z, 1)
 
 # make some prediction data
-pred_dat <- data.frame(x2 = seq(0, 1, length.out=100))
+pred_dat <- data.frame(x2 = seq(0, 1, length.out = 100))
 
 # z_pred stores the predictions
 z_pred <- evaluate_smooths(z, newdata = pred_dat)
@@ -73,11 +73,11 @@ m <- model(z_pred)
 # draw from the posterior
 draws <- mcmc(m, n_samples = 200)
 #> running 4 chains simultaneously on up to 8 CPU cores
-#>     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 31s              warmup ====                                    100/1000 | eta: 17s              warmup ======                                  150/1000 | eta: 12s              warmup ========                                200/1000 | eta: 10s              warmup ==========                              250/1000 | eta:  8s              warmup ===========                             300/1000 | eta:  7s              warmup =============                           350/1000 | eta:  6s              warmup ===============                         400/1000 | eta:  5s              warmup =================                       450/1000 | eta:  5s              warmup ===================                     500/1000 | eta:  4s              warmup =====================                   550/1000 | eta:  4s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  3s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  2s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          
-#>   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  0s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s
+#>     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 30s              warmup ====                                    100/1000 | eta: 17s              warmup ======                                  150/1000 | eta: 12s              warmup ========                                200/1000 | eta: 10s              warmup ==========                              250/1000 | eta:  8s              warmup ===========                             300/1000 | eta:  7s              warmup =============                           350/1000 | eta:  6s              warmup ===============                         400/1000 | eta:  5s              warmup =================                       450/1000 | eta:  5s              warmup ===================                     500/1000 | eta:  4s              warmup =====================                   550/1000 | eta:  4s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  3s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  2s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          
+#>   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  1s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s
 
 # plot the mgcv fit
-plot(b, scheme=1, shift=coef(b)[1])
+plot(b, scheme = 1, shift = coef(b)[1])
 
 # add in a line for each posterior sample
 apply(draws[[1]], 1, lines, x = pred_dat$x2, col = "blue")

@@ -12,6 +12,9 @@ evaluate_smooths(x, newdata)
 \item{newdata}{a dataframe with the same column names and datatypes as that
 used to create x, with data at which to evauate the smooths}
 }
+\value{
+greta array
+}
 \description{
 Evaluate a set of smooths at new data locations
 }
