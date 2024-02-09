@@ -14,7 +14,9 @@ Description: A module for greta that lets you use mgcv's smoother functions
 License: GPL(>=2) 
 Imports: mgcv
 Depends: greta
-Suggests: testthat
+Suggests: 
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
+Config/testthat/edition: 3
