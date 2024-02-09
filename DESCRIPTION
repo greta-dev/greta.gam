@@ -2,11 +2,14 @@ Package: greta.gam
 Type: Package
 Title: Generalised Additive Models in greta using mgcv
 Version: 0.1.0
-Author: c(person("Nick", "Golding", role = c("aut", "cre"),
-                 email = "nick.golding.research@gmail.com"),
-          person("David", "L", "Miller", role = c("aut", "cre"),
-                 email = "dave@ninepointeightone.net"), 
-Maintainer: Nick Golding <nick.golding.research@gmail.com>
+Author: c(
+    person("Nick", "Golding", , "nick.golding.research@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0001-8916-5570")),
+    person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", role = "aut",
+           comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722"),
+    person("David", "L", "Miller", role = c("aut", "cre"),
+           email = "dave@ninepointeightone.net")
+           )
 Description: A module for greta that lets you use mgcv's smoother functions 
     and formula syntax to define smooth terms for use in a greta model. You 
     can then define your own likelihood to complete the model, and fit it by 
