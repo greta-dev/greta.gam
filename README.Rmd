@@ -1,27 +1,29 @@
 ---
+output: github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
-  message = FALSE,
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
 ```
 
-## greta.gam
+# greta.gam: Generalised additive models in greta using mgcv
 
-### Generalised additive models in greta using mgcv.
+<!-- badges: start -->
+<!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)'s smoother functions and formula syntax to define smooth terms for use in a [greta](https://greta-dev.github.io/greta) model.
 You can then define your own likelihood to complete the model, and fit it by MCMC.
 
 This is work in progress!
 
-
-### Example
+## Example
 
 Here's a simple example adapted from the `mgcv` `?gam` help file:
 
@@ -72,20 +74,20 @@ apply(draws[[1]], 1, lines, x = pred_dat$x2, col = "blue")
 points(dat$x2, dat$y, pch = 19, cex = 0.2)
 ```
 
-### Brief technical details
+## Brief technical details
 
 `greta.gam` uses a few tricks from the `jagam` (Wood, 2016) routine in `mgcv` to get things to work. Here are some brief details for those interested in the internal workings...
 
-#### Bayesian interpretation of the GAM
+### Bayesian interpretation of the GAM
 
 GAMs are models with Bayesian interpretations (even when fitted using "frequentist" methods). One can think of the smoother penalty matrix as a prior precision matrix in a Bayesian random effects model. Design matrices are constructed exactly as in the frequentist case. See [Miller (2021)](https://arxiv.org/abs/1902.01330) for more background on this.
 
-#### Penalty matrices
+### Penalty matrices
 
 There is a slight difficulty in the Bayesian interpretation of the GAM in that, in their naïve form the priors are improper as the nullspace of the penalty (in the 1D case, usually the linear term). To get proper priors we can use one of the "tricks" employed in Marra & Wood (2011) -- that is to somehow penalise the parts of the penalty that lead to the improper prior. We take the option provided by `jagam` and create an additional penalty matrix for these terms (from an eigen-decomposition of the penalty matrix; see Marra & Wood, 2011).
 
 
-#### References
+### References
 
 Marra, G and Wood, SN (2011) Practical variable selection for generalized additive models. Computational Statistics and Data Analysis, 55, 2372–2387.
 
