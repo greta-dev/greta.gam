@@ -2,6 +2,7 @@
 % Please edit documentation in R/package.R
 \docType{package}
 \name{greta.gam}
+\alias{greta.gam-package}
 \alias{greta.gam}
 \title{greta.gam: generalised additive models in greta using mgcv}
 \description{
