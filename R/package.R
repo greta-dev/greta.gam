@@ -6,7 +6,6 @@
 #'   model. You can then define your own likelihood to complete the model, and
 #'   fit it by MCMC.
 #'
-#' @docType package
 #' @import greta
 #' @import mgcv
-NULL
+"_PACKAGE"
