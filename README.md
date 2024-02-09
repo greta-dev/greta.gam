@@ -4,6 +4,10 @@
 # greta.gam: Generalised additive models in greta using mgcv
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/greta-dev/greta.gam/branch/main/graph/badge.svg)](https://app.codecov.io/gh/greta-dev/greta.gam?branch=main)
 <!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)’s
@@ -48,7 +52,7 @@ library(greta)
 #>     eigen, forwardsolve, gamma, identity, rowMeans, rowSums, sweep,
 #>     tapply
 library(greta.gam)
-
+set.seed(2024-02-09)
 # setup the linear predictor for the smooth
 z <- smooths(~s(x2), data = dat)
 #> ℹ Initialising python and checking dependencies, this may take a moment.
@@ -70,7 +74,7 @@ m <- model(z_pred)
 draws <- mcmc(m, n_samples = 200)
 #> running 4 chains simultaneously on up to 8 CPU cores
 #>     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 31s              warmup ====                                    100/1000 | eta: 17s              warmup ======                                  150/1000 | eta: 12s              warmup ========                                200/1000 | eta: 10s              warmup ==========                              250/1000 | eta:  8s              warmup ===========                             300/1000 | eta:  7s              warmup =============                           350/1000 | eta:  6s              warmup ===============                         400/1000 | eta:  5s              warmup =================                       450/1000 | eta:  5s              warmup ===================                     500/1000 | eta:  4s              warmup =====================                   550/1000 | eta:  4s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  3s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  2s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          
-#>   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  1s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s
+#>   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  0s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s
 
 # plot the mgcv fit
 plot(b, scheme=1, shift=coef(b)[1])
