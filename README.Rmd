@@ -45,7 +45,6 @@ b <- gam(y ~ s(x2), data = dat)
 Now fitting the same model in `greta`:
 
 ```{r greta-fit}
-library(greta)
 library(greta.gam)
 set.seed(2024 - 02 - 09)
 # setup the linear predictor for the smooth
