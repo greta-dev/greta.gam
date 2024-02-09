@@ -18,7 +18,8 @@ License: GPL(>=2)
 Imports: 
     cli,
     mgcv,
-    rlang
+    rlang,
+    stats
 Depends: greta
 Suggests: 
     testthat (>= 3.0.0)
