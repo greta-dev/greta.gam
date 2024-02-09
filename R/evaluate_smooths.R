@@ -10,11 +10,11 @@
 #' @importFrom mgcv PredictMat
 #' @export
 evaluate_smooths <- function(x, newdata) {
-
   info <- attr(x, "smooth_info")
   if (is.null(info)) {
     stop("can only evaluate smooths from greta arrays created with greta.gam::smooths",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
   X_pred <- c()
@@ -25,5 +25,4 @@ evaluate_smooths <- function(x, newdata) {
   X_pred <- cbind(1, X_pred)
 
   X_pred %*% info$betas
-
 }

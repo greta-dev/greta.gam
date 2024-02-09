@@ -8,23 +8,25 @@
 #' @importFrom stats gaussian update
 #'
 #' @return a \code{list} with the following elements: \code{betas} a greta array for the coefficients to be estimated (with appropriate priors applied), \code{X} design matrix for this model, \code{X_pred} prediction matrix.
-jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
-
-
+jagam2greta <- function(formula, data, newdata, sp = NULL, knots = NULL, tol = 0) {
   # make a dummy response to get jagam to work
-  formula <- update(formula, dummy~.)
-  if("dummy" %in% colnames(data)){
+  formula <- update(formula, dummy ~ .)
+  if ("dummy" %in% colnames(data)) {
     stop("Already a dummy column in data, rename it!")
   }
   data$dummy <- rep(1, nrow(data))
 
   # do the jagam call, store the JAGS code gets stored in jags_spec
   jags_spec <- ""
-  jags_stuff <- mgcv::jagam(formula, data, family=gaussian(), knots=knots,
-                            file=textConnection("jags_spec", open="a",
-                                                local=TRUE))
+  jags_stuff <- mgcv::jagam(formula, data,
+    family = gaussian(), knots = knots,
+    file = textConnection("jags_spec",
+      open = "a",
+      local = TRUE
+    )
+  )
 
-  if(!is.null(jags_stuff$jags.data$offset)){
+  if (!is.null(jags_stuff$jags.data$offset)) {
     warning("Offsets are not directly handled, remember to write them into your linear predictor!")
   }
 
@@ -43,10 +45,9 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
   Kthings <- gsub("lambda", "sp", Kthings)
   Ktosolve <- sub("^  K(\\d+).*", "\\1", Kthings)
   for (i in seq_along(Kthings)) {
-
     thisK <- paste0("K", Ktosolve[i])
     # run the K <- S[]*sp[1] + S[]*sp[2] line
-    assign(thisK, with(jags_stuff$jags.data, eval(parse(text=Kthings[i]))))
+    assign(thisK, with(jags_stuff$jags.data, eval(parse(text = Kthings[i]))))
     # solve line
     assign(thisK, solve(get(paste0("K", Ktosolve[i]))))
 
@@ -56,13 +57,17 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
     }
     # prior on betas
     # beta <- t(multivariate_normal(zeros(dim), K))
-    assign(paste0("b", Ktosolve[i]),
-           t(multivariate_normal(zeros(1, jags_stuff$pregam$smooth[[1]]$df),
-                                 get(thisK))))
+    assign(
+      paste0("b", Ktosolve[i]),
+      t(multivariate_normal(
+        zeros(1, jags_stuff$pregam$smooth[[1]]$df),
+        get(thisK)
+      ))
+    )
     # put the betas together
-    if(i == 1){
+    if (i == 1) {
       betas <- get(paste0("b", Ktosolve[i]))
-    }else{
+    } else {
       betas <- c(betas, get(paste0("b", Ktosolve[i])))
     }
   }
@@ -75,4 +80,3 @@ jagam2greta <- function(formula, data, newdata, sp=NULL, knots=NULL, tol = 0){
 
   return(list(betas = betas, X = X, smooth_list = jags_stuff$pregam$smooth))
 }
-
