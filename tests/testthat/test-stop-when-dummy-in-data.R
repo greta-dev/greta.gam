@@ -1,5 +1,7 @@
-test_df <- data.frame(dummy = 1:5,
-                      thing = LETTERS[1:5])
+test_df <- data.frame(
+  dummy = 1:5,
+  thing = LETTERS[1:5]
+)
 
 test_that("stop_when_dummy_in_data errors appropriately", {
   expect_snapshot_error(
@@ -10,4 +12,3 @@ test_that("stop_when_dummy_in_data errors appropriately", {
     stop_when_dummy_in_data(mtcars)
   )
 })
-
