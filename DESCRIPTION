@@ -2,12 +2,12 @@ Package: greta.gam
 Type: Package
 Title: Generalised Additive Models in greta using mgcv
 Version: 0.1.0
-Author: c(
+Authors@R: c(
     person("Nick", "Golding", , "nick.golding.research@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-8916-5570")),
     person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", role = "aut",
-           comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722"),
-    person("David", "L", "Miller", role = c("aut", "cre"),
+           comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722")),
+    person("David L", "Miller", role = c("aut", "cre"),
            email = "dave@ninepointeightone.net")
            )
 Description: A module for greta that lets you use mgcv's smoother functions 
@@ -24,6 +24,5 @@ Depends: greta
 Suggests: 
     testthat (>= 3.0.0)
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.3.1
 Config/testthat/edition: 3
