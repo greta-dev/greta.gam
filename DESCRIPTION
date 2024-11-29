@@ -20,10 +20,14 @@ Imports:
     mgcv,
     rlang,
     stats
-Depends: greta
+Depends: 
+  greta (>= 0.5.0)
+  R (>= 4.1.0)
 Suggests: 
     testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
 Config/testthat/edition: 3
+URL: https://github.com/greta-dev/greta.gam, https://greta-dev.github.io/greta.gam/
+BugReports: https://github.com/greta-dev/greta.gam/issues
