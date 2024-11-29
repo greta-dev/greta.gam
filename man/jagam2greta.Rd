@@ -8,7 +8,7 @@ jagam2greta(formula, data, newdata, sp = NULL, knots = NULL, tol = 0)
 }
 \arguments{
 \item{formula}{a GAM formula representing the smooth terms, as in
-\code{\link[mgcv:gam]{mgcv::gam}}. Only the right hand side fo the formula
+\code{\link[mgcv:gam]{mgcv::gam()}}. Only the right hand side fo the formula
 will be used.}
 
 \item{data}{a data frame or list containing the covariates required by the
@@ -23,15 +23,19 @@ must be specified by the user. The smoothing parameters may either be a
 numeric vector or a greta array (which could be a variable).}
 
 \item{knots}{an optional list containing user specified knot values to be
-used for basis construction, as in \code{\link[mgcv:gam]{mgcv::gam}} These
+used for basis construction, as in \code{\link[mgcv:gam]{mgcv::gam()}} These
 knots cannot be greta arrays.}
 
 \item{tol}{a non-negative scalar numerical tolerance parameter. You can try
 increasing this if the model has numerical stability issues}
 }
 \value{
-a \code{list} with the following elements: \code{betas} a greta array for the coefficients to be estimated (with appropriate priors applied), \code{X} design matrix for this model, \code{X_pred} prediction matrix.
+a \code{list} with the following elements: \code{betas} a greta array for
+the coefficients to be estimated (with appropriate priors applied), \code{X}
+design matrix for this model, \code{X_pred} prediction matrix.
 }
 \description{
-Takes a GAM defined by \code{formula} and returns the corresponding \code{greta} model via the power of \code{jagam}. Response variable is generated from dummy data and not used.
+Takes a GAM defined by \code{formula} and returns the corresponding \code{greta} model
+via the power of \code{jagam}. Response variable is generated from dummy data
+and not used.
 }

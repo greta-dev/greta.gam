@@ -3,13 +3,27 @@ Type: Package
 Title: Generalised Additive Models in greta using mgcv
 Version: 0.1.0
 Authors@R: c(
-    person("Nick", "Golding", , "nick.golding.research@gmail.com", role = "aut",
-           comment = c(ORCID = "0000-0001-8916-5570")),
-    person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", role = "aut",
-           comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722")),
-    person("David L", "Miller", role = c("aut", "cre"),
-           email = "dave@ninepointeightone.net")
-           )
+    person(
+      given = "Nick", 
+      family = "Golding", 
+      email = "nick.golding.research@gmail.com", 
+      role = "aut",
+      comment = c(ORCID = "0000-0001-8916-5570")
+      ),
+    person(
+      given = "Nicholas", 
+      family = "Tierney", 
+      email = "nicholas.tierney@gmail.com", 
+      role = c("aut"),
+      comment = c(ORCID = "0000-0003-1460-8722")
+      ),
+    person(
+      given = "David L", 
+      family = "Miller", 
+      role = c("aut", "cre"),
+      email = "dave@ninepointeightone.net"
+      )
+      )
 Description: A module for greta that lets you use mgcv's smoother functions 
     and formula syntax to define smooth terms for use in a greta model. You 
     can then define your own likelihood to complete the model, and fit it by 
@@ -20,9 +34,15 @@ Imports:
     mgcv,
     rlang,
     stats
-Depends: greta
+Depends: 
+  greta (>= 0.5.0),
+  R (>= 4.1.0)
 Suggests: 
     testthat (>= 3.0.0)
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+LazyData: true
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
+URL: https://github.com/greta-dev/greta.gam, https://greta-dev.github.io/greta.gam/
+BugReports: https://github.com/greta-dev/greta.gam/issues
+Roxygen: list(markdown = TRUE)
