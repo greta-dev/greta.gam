@@ -6,8 +6,17 @@
 \alias{greta.gam}
 \title{greta.gam: generalised additive models in greta using mgcv}
 \description{
-greta.gam is a module for greta that lets you use mgcv's smoother
-  functions and formula syntax to define smooth terms for use in a greta
-  model. You can then define your own likelihood to complete the model, and
-  fit it by MCMC.
+greta.gam is a module for greta that lets you use mgcv's
+smoother functions and formula syntax to define smooth terms for use in a
+greta model. You can then define your own likelihood to complete the
+model, and fit it by MCMC.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/greta-dev/greta.gam}
+  \item \url{https://greta-dev.github.io/greta.gam/}
+  \item Report bugs at \url{https://github.com/greta-dev/greta.gam/issues}
+}
+
 }

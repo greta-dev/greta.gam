@@ -1,12 +1,18 @@
 #' Turn a jagam model definition into a greta model definition
 #'
-#' Takes a GAM defined by \code{formula} and returns the corresponding \code{greta} model via the power of \code{jagam}. Response variable is generated from dummy data and not used.
+#' Takes a GAM defined by `formula` and returns the corresponding `greta` model
+#'   via the power of `jagam`. Response variable is generated from dummy data
+#'   and not used.
 #'
 #' @inheritParams smooths
 #' @param newdata new dataset
 #'
-#' @return a \code{list} with the following elements: \code{betas} a greta array for the coefficients to be estimated (with appropriate priors applied), \code{X} design matrix for this model, \code{X_pred} prediction matrix.
-jagam2greta <- function(formula, data, newdata, sp = NULL, knots = NULL, tol = 0) {
+#' @return a `list` with the following elements: `betas` a greta array for
+#'   the coefficients to be estimated (with appropriate priors applied), `X`
+#'   design matrix for this model, `X_pred` prediction matrix.
+jagam2greta <- function(formula,
+                        data,
+                        newdata, sp = NULL, knots = NULL, tol = 0) {
   # make a dummy response to get jagam to work
   formula <- stats::update(formula, dummy ~ .)
 
