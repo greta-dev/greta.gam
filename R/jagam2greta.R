@@ -12,7 +12,10 @@
 #'   design matrix for this model, `X_pred` prediction matrix.
 jagam2greta <- function(formula,
                         data,
-                        newdata, sp = NULL, knots = NULL, tol = 0) {
+                        newdata,
+                        sp = NULL,
+                        knots = NULL,
+                        tol = 0) {
   # make a dummy response to get jagam to work
   formula <- stats::update(formula, dummy ~ .)
 
@@ -37,9 +40,8 @@ jagam2greta <- function(formula,
   X <- jags_stuff$jags.data$X
 
   # do something smart with smoothing parameters
-  if (is.null(sp)) {
-    sp <- gamma(0.05, 1 / 0.005, dim = 2 * length(jags_stuff$pregam$smooth))
-  }
+  n_smooth_params <- length(jags_stuff$pregam$smooth)
+  sp <- sp %||% gamma(0.05, 1 / 0.005, dim = 2 * n_smooth_params)
 
   # get all the penalties, form them (because of proper priorness), then
   # turn them into vcov matrices via solve()
@@ -80,5 +82,9 @@ jagam2greta <- function(formula,
   # put all the betas together
   betas <- c(int, betas)
 
-  return(list(betas = betas, X = X, smooth_list = jags_stuff$pregam$smooth))
+  return(list(
+    betas = betas,
+    X = X,
+    smooth_list = jags_stuff$pregam$smooth
+  ))
 }

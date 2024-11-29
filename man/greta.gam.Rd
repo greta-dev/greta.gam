@@ -20,3 +20,13 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: David L Miller \email{dave@ninepointeightone.net}
+
+Authors:
+\itemize{
+  \item Nick Golding \email{nick.golding.research@gmail.com} (\href{https://orcid.org/0000-0001-8916-5570}{ORCID})
+  \item Nicholas Tierney \email{nicholas.tierney@gmail.com} (\href{https://orcid.org/0000-0003-1460-8722}{ORCID})
+}
+
+}
