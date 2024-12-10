@@ -15,7 +15,12 @@ test_that("evaluate_smooths errors appropriately", {
     error = TRUE,
     evaluate_smooths("thing")
   )
-  expect_no_error(
-    z_pred <- evaluate_smooths(z, newdata = data.frame(x = x_plot))
+  expect_snapshot(
+    (eval_z <- evaluate_smooths(z, newdata = data.frame(x = x_plot)))
+  )
+
+  expect_s3_class(
+    object = eval_z,
+    "greta_array"
   )
 })
