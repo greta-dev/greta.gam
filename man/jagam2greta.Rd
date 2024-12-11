@@ -39,3 +39,25 @@ Takes a GAM defined by \code{formula} and returns the corresponding \code{greta}
 via the power of \code{jagam}. Response variable is generated from dummy data
 and not used.
 }
+\examples{
+\dontrun{
+n <- 30
+
+x <- runif(n, 0, 10)
+
+f <- function(x) {
+  sin(x * 2) + 1.6 * (x < 3) - 1.4 * (x > 7)
+}
+
+y <- f(x) + rnorm(n, 0, 0.3)
+
+x_plot <- seq(0, 10, length.out = 200)
+
+jagam2greta(
+  formula = ~ s(x),
+  data = data.frame(x = x),
+  tol = 0
+)
+}
+
+}

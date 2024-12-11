@@ -7,5 +7,9 @@
 #'   model, and fit it by MCMC.
 #'
 #' @import greta
-#' @import mgcv
+#' @keywords internal
 "_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
+NULL

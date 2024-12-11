@@ -10,6 +10,27 @@
 #' @return a `list` with the following elements: `betas` a greta array for
 #'   the coefficients to be estimated (with appropriate priors applied), `X`
 #'   design matrix for this model, `X_pred` prediction matrix.
+#' @examples
+#' \dontrun{
+#' n <- 30
+#'
+#' x <- runif(n, 0, 10)
+#'
+#' f <- function(x) {
+#'   sin(x * 2) + 1.6 * (x < 3) - 1.4 * (x > 7)
+#' }
+#'
+#' y <- f(x) + rnorm(n, 0, 0.3)
+#'
+#' x_plot <- seq(0, 10, length.out = 200)
+#'
+#' jagam2greta(
+#'   formula = ~ s(x),
+#'   data = data.frame(x = x),
+#'   tol = 0
+#' )
+#' }
+#'
 jagam2greta <- function(formula,
                         data,
                         newdata,

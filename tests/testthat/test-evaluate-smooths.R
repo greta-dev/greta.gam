@@ -23,4 +23,15 @@ test_that("evaluate_smooths errors appropriately", {
     object = eval_z,
     "greta_array"
   )
+
+  expect_s3_class(
+    object = eval_z,
+    "array"
+  )
+
+  expect_equal(
+    object = dim(eval_z),
+    expected = c(200, 1)
+  )
+
 })

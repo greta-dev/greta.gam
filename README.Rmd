@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# greta.gam: Generalised additive models in greta using mgcv
+# greta.gam: generalised additive models in greta using mgcv
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml)
@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)'s smoother functions and formula syntax to define smooth terms for use in a [greta](https://greta-dev.github.io/greta) model.
-You can then define your own likelihood to complete the model, and fit it by MCMC.
+You can then define your own likelihood to complete the model, and fit it by MCMC. 
 
-This is work in progress!
+The design and architecture of the package was done by [Nick Golding](https://github.com/goldingn), and [David L Miller](https://github.com/dill).
 
 ## Example
 
@@ -77,7 +77,7 @@ points(dat$x2, dat$y, pch = 19, cex = 0.2)
 
 ## Brief technical details
 
-`greta.gam` uses a few tricks from the `jagam` (Wood, 2016) routine in `mgcv` to get things to work. Here are some brief details for those interested in the internal workings...
+`greta.gam` uses a few tricks from the `jagam` (Wood, 2016) routine in `mgcv` to get things to work. Here are some brief details for those interested in the internal workings.
 
 ### Bayesian interpretation of the GAM
 

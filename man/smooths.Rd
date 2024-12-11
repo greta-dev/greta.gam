@@ -27,6 +27,9 @@ numeric vector or a greta array (which could be a variable).}
 \item{tol}{a non-negative scalar numerical tolerance parameter. You can try
 increasing this if the model has numerical stability issues}
 }
+\value{
+Object of class "greta_array".
+}
 \description{
 \code{smooths} translates the right hand side of a mgcv GAM
 formula into a corresponding Bayesian representation of smooth terms. This
