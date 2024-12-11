@@ -7,10 +7,10 @@ test_that("check_if_formula works", {
     error = TRUE,
     check_if_formula("y~x")
   )
-  expect_success(
+  expect_no_error(
     check_if_formula(y~x)
   )
-  expect_success(
+  expect_no_error(
     check_if_formula(y~s(x))
   )
 })
