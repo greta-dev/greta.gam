@@ -46,6 +46,7 @@
 #'   MCMC to carry out this integration - it does not make sense to do maximum
 #'   likelihood optimisation on a greta model that uses `smooths`.
 #'
+#' @return Object of class "greta_array".
 #'
 #' @examples
 #' \dontrun{
