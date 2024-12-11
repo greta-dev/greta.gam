@@ -1,6 +1,6 @@
 Package: greta.gam
 Type: Package
-Title: Generalised Additive Models in greta using mgcv
+Title: Generalised Additive Models in greta using 'mgcv'
 Version: 0.1.0
 Authors@R: c(
     person(
@@ -14,13 +14,13 @@ Authors@R: c(
       given = "Nicholas", 
       family = "Tierney", 
       email = "nicholas.tierney@gmail.com", 
-      role = c("aut"),
+      role = c("aut", "cre"),
       comment = c(ORCID = "0000-0003-1460-8722")
       ),
     person(
       given = "David L", 
       family = "Miller", 
-      role = c("aut", "cre"),
+      role = c("aut"),
       email = "dave@ninepointeightone.net"
       )
       )
