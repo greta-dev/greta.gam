@@ -25,7 +25,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Nick Golding \email{nick.golding.research@gmail.com} (\href{https://orcid.org/0000-0001-8916-5570}{ORCID})
+  \item Nick Golding \email{nick.golding.research@gmail.com} (\href{https://orcid.org/0000-0001-8916-5570}{ORCID}) [copyright holder]
   \item David L Miller \email{dave@ninepointeightone.net}
 }
 
