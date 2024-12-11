@@ -9,3 +9,4 @@ figure/
 ^pkgdown$
 ^codemeta\.json$
 ^cran-comments\.md$
+^LICENSE\.md$
