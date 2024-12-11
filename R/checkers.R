@@ -43,11 +43,27 @@ warn_if_offsets_present <- function(jags_stuff,
 warn_if_formula_has_lhs <- function(formula,
                                     arg = rlang::caller_arg(formula),
                                     call = rlang::caller_env()) {
-  if (length(formula) > 2) {
+  has_lhs <- rlang::is_formula(formula, lhs = TRUE)
+  if (has_lhs) {
     cli::cli_warn(
       c(
         "Formula has a left hand side",
         "Only the right hand side will be used to define the smooth"
+      ),
+      call = call
+    )
+  }
+}
+
+check_if_formula <- function(formula,
+                             arg = rlang::caller_arg(formula),
+                             call = rlang::caller_env()){
+  not_formula <- !rlang::is_bare_formula(formula)
+  if (not_formula) {
+    cli::cli_abort(
+      c(
+        "Input must be a formula",
+        "We see that {.code formula} has class, {.cls {class(formula)}}."
       ),
       call = call
     )

@@ -77,6 +77,7 @@ smooths <- function(formula,
                     knots = NULL,
                     sp = NULL,
                     tol = 0) {
+  check_if_formula(formula)
   warn_if_formula_has_lhs(formula)
 
   # get all the MGCV objects for Bayesian version, converted to greta arrays

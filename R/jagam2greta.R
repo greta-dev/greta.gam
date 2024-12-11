@@ -25,9 +25,13 @@ jagam2greta <- function(formula,
 
   # do the jagam call, store the JAGS code gets stored in jags_spec
   jags_spec <- ""
-  jags_stuff <- mgcv::jagam(formula, data,
-    family = stats::gaussian(), knots = knots,
-    file = textConnection("jags_spec",
+  jags_stuff <- mgcv::jagam(
+    formula = formula,
+    data = data,
+    family = stats::gaussian(),
+    knots = knots,
+    file = textConnection(
+      "jags_spec",
       open = "a",
       local = TRUE
     )
