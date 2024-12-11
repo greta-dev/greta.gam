@@ -32,6 +32,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -52,12 +53,22 @@
 
 <p>greta.gam lets you use <a href="https://CRAN.R-project.org/package=mgcv" class="external-link">mgcv</a>’s smoother functions and formula syntax to define smooth terms for use in a <a href="https://greta-dev.github.io/greta" class="external-link">greta</a> model. You can then define your own likelihood to complete the model, and fit it by MCMC.</p>
 <p>The design and architecture of the package was done by <a href="https://github.com/goldingn" class="external-link">Nick Golding</a>, and <a href="https://github.com/dill" class="external-link">David L Miller</a>.</p>
+</div>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<p>You can install the development version of <code>greta.gam</code> from the <a href="https://greta-dev.r-universe.dev/greta.gam" class="external-link">R-universe</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"greta.gam"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://greta-dev.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Or you can install from CRAN with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"greta.gam"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Here’s a simple example adapted from the <code>mgcv</code> <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">?gam</a></code> help file:</p>
 <p>In <code>mgcv</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: nlme</span></span>
 <span><span class="co">#&gt; This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.</span></span>
@@ -70,7 +81,7 @@
 <span><span class="co"># fit a model using gam()</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <p>Now fitting the same model in <code>greta</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/greta-dev/greta.gam" class="external-link">greta.gam</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: greta</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -104,7 +115,7 @@
 <span><span class="co"># draw from the posterior</span></span>
 <span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="fu">mcmc</span><span class="op">(</span><span class="va">m</span>, n_samples <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span>
 <span><span class="co">#&gt; running 4 chains simultaneously on up to 8 CPU cores</span></span>
-<span><span class="co">#&gt;     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 27s              warmup ====                                    100/1000 | eta: 15s              warmup ======                                  150/1000 | eta: 10s              warmup ========                                200/1000 | eta:  8s              warmup ==========                              250/1000 | eta:  7s              warmup ===========                             300/1000 | eta:  6s              warmup =============                           350/1000 | eta:  5s              warmup ===============                         400/1000 | eta:  4s              warmup =================                       450/1000 | eta:  4s              warmup ===================                     500/1000 | eta:  3s              warmup =====================                   550/1000 | eta:  3s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  2s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  1s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          </span></span>
+<span><span class="co">#&gt;     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 29s              warmup ====                                    100/1000 | eta: 16s              warmup ======                                  150/1000 | eta: 11s              warmup ========                                200/1000 | eta:  9s              warmup ==========                              250/1000 | eta:  7s              warmup ===========                             300/1000 | eta:  6s              warmup =============                           350/1000 | eta:  5s              warmup ===============                         400/1000 | eta:  5s              warmup =================                       450/1000 | eta:  4s              warmup ===================                     500/1000 | eta:  3s              warmup =====================                   550/1000 | eta:  3s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  2s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  1s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          </span></span>
 <span><span class="co">#&gt;   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  0s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s</span></span>
 <span></span>
 <span><span class="co"># plot the mgcv fit</span></span>
@@ -141,6 +152,7 @@
 </div>
 </div>
 </div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
