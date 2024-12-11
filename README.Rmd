@@ -25,6 +25,22 @@ You can then define your own likelihood to complete the model, and fit it by MCM
 
 The design and architecture of the package was done by [Nick Golding](https://github.com/goldingn), and [David L Miller](https://github.com/dill).
 
+
+# Installation
+
+You can install the development version of `greta.gam` from the [R-universe](https://greta-dev.r-universe.dev/greta.gam) with:
+
+```{r install, eval = FALSE}
+install.packages("greta.gam", repos = c("https://greta-dev.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+Or you can install from CRAN with:
+
+```{r install-cran, eval = FALSE}
+install.packages("greta.gam")
+```
+
+
 ## Example
 
 Here's a simple example adapted from the `mgcv` `?gam` help file:

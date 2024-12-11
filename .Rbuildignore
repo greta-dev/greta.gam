@@ -8,3 +8,4 @@ figure/
 ^docs$
 ^pkgdown$
 ^codemeta\.json$
+^cran-comments\.md$
