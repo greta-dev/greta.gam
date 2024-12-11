@@ -31,7 +31,7 @@ evaluate_smooths <- function(x, newdata) {
 
   stop_if_no_smooth_info(info)
 
-  X_pred <- c()
+  X_pred <- matrix(numeric(), nrow = nrow(newdata))
   for (i in seq_along(info$smooth_list)) {
     # make X_pred
     X_pred <- cbind(X_pred, mgcv::PredictMat(info$smooth_list[[i]], newdata))
