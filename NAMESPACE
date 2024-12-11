@@ -3,4 +3,3 @@
 export(evaluate_smooths)
 export(smooths)
 import(greta)
-import(mgcv)
