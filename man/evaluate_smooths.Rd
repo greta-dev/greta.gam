@@ -10,7 +10,7 @@ evaluate_smooths(x, newdata)
 \item{x}{a greta array created with greta.gam::smooths}
 
 \item{newdata}{a dataframe with the same column names and datatypes as that
-used to create x, with data at which to evauate the smooths}
+used to create x, with data at which to evaluate the smooths}
 }
 \value{
 greta array

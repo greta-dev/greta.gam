@@ -4,7 +4,7 @@
 #'
 #' @param x a greta array created with greta.gam::smooths
 #' @param newdata a dataframe with the same column names and datatypes as that
-#'   used to create x, with data at which to evauate the smooths
+#'   used to create x, with data at which to evaluate the smooths
 #' @return greta array
 #' @author Nick Golding
 #' @examples

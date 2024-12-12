@@ -9,7 +9,7 @@
 #'   representing the combined smooth can then be used in a greta model.
 #'
 #' @param formula a GAM formula representing the smooth terms, as in
-#'   [mgcv::gam()]. Only the right hand side fo the formula
+#'   [mgcv::gam()]. Only the right hand side of the formula
 #'   will be used.
 #'
 #' @param data a data frame or list containing the covariates required by the

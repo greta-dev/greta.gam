@@ -40,6 +40,7 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
+    spelling,
     testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
@@ -49,3 +50,4 @@ URL: https://github.com/greta-dev/greta.gam, https://greta-dev.github.io/greta.g
 BugReports: https://github.com/greta-dev/greta.gam/issues
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+Language: en-GB

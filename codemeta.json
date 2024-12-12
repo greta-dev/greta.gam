@@ -2,12 +2,12 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "greta.gam",
-  "description": "A module for greta that lets you use mgcv's smoother functions and formula syntax to define smooth terms for use in a greta model. You can then define your own likelihood to complete the model, and fit it by MCMC. ",
-  "name": "greta.gam: Generalised Additive Models in greta using mgcv",
+  "description": "A module for greta (Golding (2019) <doi:10.21105/joss.01601>) that lets you use the 'mgcv' smoother functions and formula syntax to define smooth terms for use in a greta model. You can then define your own likelihood to complete the model, and fit it by MCMC. ",
+  "name": "greta.gam: Generalised Additive Models in 'greta' using 'mgcv'",
   "relatedLink": "https://greta-dev.github.io/greta.gam/",
   "codeRepository": "https://github.com/greta-dev/greta.gam",
   "issueTracker": "https://github.com/greta-dev/greta.gam/issues",
-  "license": "https://spdx.org/licenses/GPL-2.0",
+  "license": "Apache License 2",
   "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
@@ -37,15 +37,61 @@
       "email": "dave@ninepointeightone.net"
     }
   ],
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "Nick",
+      "familyName": "Golding",
+      "email": "nick.golding.research@gmail.com",
+      "@id": "https://orcid.org/0000-0001-8916-5570"
+    }
+  ],
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "David L",
-      "familyName": "Miller",
-      "email": "dave@ninepointeightone.net"
+      "givenName": "Nicholas",
+      "familyName": "Tierney",
+      "email": "nicholas.tierney@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1460-8722"
     }
   ],
   "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "spelling",
+      "name": "spelling",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=spelling"
+    },
     {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
@@ -123,7 +169,8 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "85.96KB",
+  "fileSize": "208.45KB",
+  "releaseNotes": "https://github.com/greta-dev/greta.gam/blob/master/NEWS.md",
   "readme": "https://github.com/greta-dev/greta.gam/blob/main/README.md",
   "contIntegration": ["https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/greta-dev/greta.gam?branch=main"]
 }

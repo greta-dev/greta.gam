@@ -8,7 +8,7 @@ jagam2greta(formula, data, newdata, sp = NULL, knots = NULL, tol = 0)
 }
 \arguments{
 \item{formula}{a GAM formula representing the smooth terms, as in
-\code{\link[mgcv:gam]{mgcv::gam()}}. Only the right hand side fo the formula
+\code{\link[mgcv:gam]{mgcv::gam()}}. Only the right hand side of the formula
 will be used.}
 
 \item{data}{a data frame or list containing the covariates required by the
