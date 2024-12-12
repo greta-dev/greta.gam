@@ -38,6 +38,8 @@ Depends:
   greta (>= 0.5.0),
   R (>= 4.1.0)
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
@@ -46,3 +48,4 @@ Config/testthat/edition: 3
 URL: https://github.com/greta-dev/greta.gam, https://greta-dev.github.io/greta.gam/
 BugReports: https://github.com/greta-dev/greta.gam/issues
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr

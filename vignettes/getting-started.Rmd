@@ -1,42 +1,23 @@
 ---
-output: github_document
+title: "Getting Started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{getting-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  eval = greta:::check_tf_version("message"),
+  fig.height = 5,
+  fig.width = 7
 )
 ```
-
-# greta.gam: generalised additive models in greta using mgcv
-
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/greta-dev/greta.gam/branch/main/graph/badge.svg)](https://app.codecov.io/gh/greta-dev/greta.gam?branch=main)
-<!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)'s smoother functions and formula syntax to define smooth terms for use in a [greta](https://greta-stats.org/) model. You can then define your own likelihood to complete the model, and fit it by MCMC. 
 
 The design and architecture of the package was done by [Nick Golding](https://github.com/goldingn), and [David L Miller](https://github.com/dill).
-
-# Installation
-
-You can install the development version of `greta.gam` from the [R-universe](https://greta-dev.r-universe.dev/greta.gam) with:
-
-```{r install, eval = FALSE}
-install.packages("greta.gam", repos = c("https://greta-dev.r-universe.dev", "https://cloud.r-project.org"))
-```
-
-Or you can install from CRAN with:
-
-```{r install-cran, eval = FALSE}
-install.packages("greta.gam")
-```
 
 ## Example
 
@@ -112,7 +93,7 @@ draws[[1]][1:5, 1:5]
 
 Now let's compare the `mgcv` model fit to the `greta.gam` fit:
 
-```{r greta-fit-show-preds}
+```{r greta-fit-plot-greta-v-mgcv}
 plot(mgcv_fit, scheme = 1, shift = coef(mgcv_fit)[1])
 
 # add in a line for each posterior sample
