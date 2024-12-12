@@ -32,6 +32,12 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/getting-started.html">Getting Started</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -66,21 +72,71 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>Here’s a simple example adapted from the <code>mgcv</code> <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">?gam</a></code> help file:</p>
-<p>In <code>mgcv</code>:</p>
+<p>Here’s a simple example adapted from the <code>mgcv</code> <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">?gam</a></code> help file. In <code>mgcv</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: nlme</span></span>
 <span><span class="co">#&gt; This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2024</span> <span class="op">-</span> <span class="fl">12</span> <span class="op">-</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># simulate some data...</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gamSim.html" class="external-link">gamSim</a></span><span class="op">(</span><span class="fl">1</span>, n <span class="op">=</span> <span class="fl">400</span>, dist <span class="op">=</span> <span class="st">"normal"</span>, scale <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Gu &amp; Wahba 4 term additive model</span></span>
-<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           y        x0        x1        x2        x3         f       f0       f1</span></span>
+<span><span class="co">#&gt; 1  6.189450 0.1965959 0.4034173 0.7343655 0.7300751  5.759744 1.158200 2.240804</span></span>
+<span><span class="co">#&gt; 2 11.198472 0.7164260 0.8771072 0.1027748 0.6644855 11.004222 1.555243 5.778906</span></span>
+<span><span class="co">#&gt; 3  5.100980 0.3620857 0.4601120 0.8524531 0.9341949  4.681517 1.815195 2.509852</span></span>
+<span><span class="co">#&gt; 4  7.441910 0.3910775 0.5848327 0.7292472 0.5560306  7.557107 1.884044 3.220915</span></span>
+<span><span class="co">#&gt; 5  7.617724 0.8133072 0.6959593 0.7285362 0.6814503  7.594086 1.106920 4.022560</span></span>
+<span><span class="co">#&gt; 6  7.668790 0.4279599 0.3961759 0.5802106 0.3974592  7.235281 1.948997 2.208585</span></span>
+<span><span class="co">#&gt;          f2 f3</span></span>
+<span><span class="co">#&gt; 1 2.3607405  0</span></span>
+<span><span class="co">#&gt; 2 3.6700722  0</span></span>
+<span><span class="co">#&gt; 3 0.3564696  0</span></span>
+<span><span class="co">#&gt; 4 2.4521485  0</span></span>
+<span><span class="co">#&gt; 5 2.4646055  0</span></span>
+<span><span class="co">#&gt; 6 3.0776995  0</span></span>
 <span><span class="co"># fit a model using gam()</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<p>Now fitting the same model in <code>greta</code>:</p>
+<span><span class="va">mgcv_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">mgcv_fit</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Family: gaussian </span></span>
+<span><span class="co">#&gt; Link function: identity </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Formula:</span></span>
+<span><span class="co">#&gt; y ~ s(x2)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
+<span><span class="co">#&gt; 8.04  total = 9.04 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; GCV score: 3.829468</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mgcv_fit</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Family: gaussian </span></span>
+<span><span class="co">#&gt; Link function: identity </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Formula:</span></span>
+<span><span class="co">#&gt; y ~ s(x2)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Parametric coefficients:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)  8.08745    0.09673    83.6   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Approximate significance of smooth terms:</span></span>
+<span><span class="co">#&gt;         edf Ref.df     F p-value    </span></span>
+<span><span class="co">#&gt; s(x2) 8.036  8.749 91.18  &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; R-sq.(adj) =  0.667   Deviance explained = 67.4%</span></span>
+<span><span class="co">#&gt; GCV = 3.8295  Scale est. = 3.743     n = 400</span></span>
+<span><span class="co">## show partial residuals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mgcv_fit</span>, scheme <span class="op">=</span> <span class="fl">1</span>, shift <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mgcv_fit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-mgcv-generate-and-fit-1.png" width="100%"></p>
+<p>Now fitting the same model in <code>greta</code>. We first start by setting up the linear predictor for the smooth. That is, the right hand side of the formula:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/greta-dev/greta.gam" class="external-link">greta.gam</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: greta</span></span>
@@ -96,38 +152,107 @@
 <span><span class="co">#&gt;     tapply</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2024</span> <span class="op">-</span> <span class="fl">02</span> <span class="op">-</span> <span class="fl">09</span><span class="op">)</span></span>
 <span><span class="co"># setup the linear predictor for the smooth</span></span>
-<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/smooths.html">smooths</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">linear_predictor</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/smooths.html">smooths</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Initialising python and checking dependencies, this may take a moment.</span></span>
 <span><span class="co">#&gt; ✔ Initialising python and checking dependencies ... done!               </span></span>
+<span><span class="va">linear_predictor</span></span>
+<span><span class="co">#&gt; greta array &lt;operation&gt;</span></span>
+<span><span class="co">#&gt;       [,1]</span></span>
+<span><span class="co">#&gt;  [1,]  ?  </span></span>
+<span><span class="co">#&gt;  [2,]  ?  </span></span>
+<span><span class="co">#&gt;  [3,]  ?  </span></span>
+<span><span class="co">#&gt;  [4,]  ?  </span></span>
+<span><span class="co">#&gt;  [5,]  ?  </span></span>
+<span><span class="co">#&gt;  [6,]  ?  </span></span>
+<span><span class="co">#&gt;  [7,]  ?  </span></span>
+<span><span class="co">#&gt;  [8,]  ?  </span></span>
+<span><span class="co">#&gt;  [9,]  ?  </span></span>
+<span><span class="co">#&gt; [10,]  ?</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ℹ 390 more values</span></span>
+<span><span class="co">#&gt; Use `print(n = ...)` to see more values</span></span></code></pre></div>
+<p>Now we specify the distribution of the response:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://greta-stats.org/reference/distribution.html" class="external-link">distribution</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/distributions.html" class="external-link">normal</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">linear_predictor</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<p>Now let’s make some prediction data</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="co"># set the distribution of the response</span></span>
-<span><span class="fu"><a href="https://greta-stats.org/reference/distribution.html" class="external-link">distribution</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/distributions.html" class="external-link">normal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># make some prediction data</span></span>
-<span><span class="va">pred_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># z_pred stores the predictions</span></span>
-<span><span class="va">z_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/evaluate_smooths.html">evaluate_smooths</a></span><span class="op">(</span><span class="va">z</span>, newdata <span class="op">=</span> <span class="va">pred_dat</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># build model</span></span>
-<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/model.html" class="external-link">model</a></span><span class="op">(</span><span class="va">z_pred</span><span class="op">)</span></span>
-<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pred_dat</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           x2</span></span>
+<span><span class="co">#&gt; 1 0.00000000</span></span>
+<span><span class="co">#&gt; 2 0.01010101</span></span>
+<span><span class="co">#&gt; 3 0.02020202</span></span>
+<span><span class="co">#&gt; 4 0.03030303</span></span>
+<span><span class="co">#&gt; 5 0.04040404</span></span>
+<span><span class="co">#&gt; 6 0.05050505</span></span></code></pre></div>
+<p>We run <code>evaluate_smooths</code> on the linear predicting with the new prediction data</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linear_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/evaluate_smooths.html">evaluate_smooths</a></span><span class="op">(</span><span class="va">linear_predictor</span>, newdata <span class="op">=</span> <span class="va">pred_dat</span><span class="op">)</span></span>
+<span><span class="va">linear_preds</span></span>
+<span><span class="co">#&gt; greta array &lt;operation&gt;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;       [,1]</span></span>
+<span><span class="co">#&gt;  [1,]  ?  </span></span>
+<span><span class="co">#&gt;  [2,]  ?  </span></span>
+<span><span class="co">#&gt;  [3,]  ?  </span></span>
+<span><span class="co">#&gt;  [4,]  ?  </span></span>
+<span><span class="co">#&gt;  [5,]  ?  </span></span>
+<span><span class="co">#&gt;  [6,]  ?  </span></span>
+<span><span class="co">#&gt;  [7,]  ?  </span></span>
+<span><span class="co">#&gt;  [8,]  ?  </span></span>
+<span><span class="co">#&gt;  [9,]  ?  </span></span>
+<span><span class="co">#&gt; [10,]  ?</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ℹ 90 more values</span></span>
+<span><span class="co">#&gt; Use `print(n = ...)` to see more values</span></span></code></pre></div>
+<p>Now we specify that as a model object and then fit with MCMC as we do with greta normally:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># build model</span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/model.html" class="external-link">model</a></span><span class="op">(</span><span class="va">linear_preds</span><span class="op">)</span></span>
+<span><span class="va">m</span></span>
+<span><span class="co">#&gt; greta model</span></span>
 <span><span class="co"># draw from the posterior</span></span>
-<span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="fu">mcmc</span><span class="op">(</span><span class="va">m</span>, n_samples <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span>
-<span><span class="co">#&gt; running 4 chains simultaneously on up to 8 CPU cores</span></span>
-<span><span class="co">#&gt;     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 29s              warmup ====                                    100/1000 | eta: 16s              warmup ======                                  150/1000 | eta: 11s              warmup ========                                200/1000 | eta:  9s              warmup ==========                              250/1000 | eta:  7s              warmup ===========                             300/1000 | eta:  6s              warmup =============                           350/1000 | eta:  5s              warmup ===============                         400/1000 | eta:  5s              warmup =================                       450/1000 | eta:  4s              warmup ===================                     500/1000 | eta:  4s              warmup =====================                   550/1000 | eta:  3s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  2s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  2s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          </span></span>
-<span><span class="co">#&gt;   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  0s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s</span></span>
+<span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="fu">mcmc</span><span class="op">(</span><span class="va">m</span>, n_samples <span class="op">=</span> <span class="fl">200</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">draws</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "greta_mcmc_list" "mcmc.list"</span></span>
+<span><span class="co"># 4 chains</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">draws</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 4</span></span>
 <span></span>
-<span><span class="co"># plot the mgcv fit</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">b</span>, scheme <span class="op">=</span> <span class="fl">1</span>, shift <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co"># 200 draws, 100 predictors</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">draws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 200 100</span></span>
+<span></span>
+<span><span class="co"># look at the top corner</span></span>
+<span><span class="va">draws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]</span></span>
+<span><span class="co">#&gt; 1          3.584717          3.965028          4.346026          4.729800</span></span>
+<span><span class="co">#&gt; 2          3.685425          4.068849          4.452934          4.839685</span></span>
+<span><span class="co">#&gt; 3          3.685425          4.068849          4.452934          4.839685</span></span>
+<span><span class="co">#&gt; 4          3.461360          3.880266          4.299797          4.721838</span></span>
+<span><span class="co">#&gt; 5          3.597318          4.008570          4.420449          4.834854</span></span>
+<span><span class="co">#&gt;   linear_preds[5,1]</span></span>
+<span><span class="co">#&gt; 1          5.120307</span></span>
+<span><span class="co">#&gt; 2          5.232892</span></span>
+<span><span class="co">#&gt; 3          5.232892</span></span>
+<span><span class="co">#&gt; 4          5.149939</span></span>
+<span><span class="co">#&gt; 5          5.255362</span></span></code></pre></div>
+<p>Now let’s compare the <code>mgcv</code> model fit to the <code>greta.gam</code> fit:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mgcv_fit</span>, scheme <span class="op">=</span> <span class="fl">1</span>, shift <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mgcv_fit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># add in a line for each posterior sample</span></span>
-<span><span class="fu"><a href="https://greta-stats.org/reference/overloaded.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">draws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="fl">1</span>, <span class="va">lines</span>, x <span class="op">=</span> <span class="va">pred_dat</span><span class="op">$</span><span class="va">x2</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://greta-stats.org/reference/overloaded.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">draws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="fl">1</span>, <span class="va">lines</span>, x <span class="op">=</span> <span class="va">pred_dat</span><span class="op">$</span><span class="va">x2</span>, </span>
+<span>      col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/adjustcolor.html" class="external-link">adjustcolor</a></span><span class="op">(</span><span class="st">"firebrick"</span>, alpha.f <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; NULL</span></span>
 <span></span>
 <span><span class="co"># plot the data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">x2</span>, <span class="va">dat</span><span class="op">$</span><span class="va">y</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-greta-fit-1.png" width="100%"></p>
+<p><img src="reference/figures/README-greta-fit-show-preds-1.png" width="100%"></p>
+<p>The <code>mgcv</code> predictions are in the grey ribbon, and the <code>greta.gam</code> ones are in red - we can see that the greta predictions are within the range of the mgcv, which is good news!</p>
 </div>
 <div class="section level2">
 <h2 id="brief-technical-details">Brief technical details<a class="anchor" aria-label="anchor" href="#brief-technical-details"></a>
@@ -143,14 +268,14 @@
 </h3>
 <p>There is a slight difficulty in the Bayesian interpretation of the GAM in that, in their naïve form the priors are improper as the nullspace of the penalty (in the 1D case, usually the linear term). To get proper priors we can use one of the “tricks” employed in Marra &amp; Wood (2011) – that is to somehow penalise the parts of the penalty that lead to the improper prior. We take the option provided by <code>jagam</code> and create an additional penalty matrix for these terms (from an eigen-decomposition of the penalty matrix; see Marra &amp; Wood, 2011).</p>
 </div>
-<div class="section level3">
-<h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h3>
+</div>
+</div>
+<div class="section level1">
+<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h1>
 <p>Marra, G and Wood, SN (2011) Practical variable selection for generalized additive models. Computational Statistics and Data Analysis, 55, 2372–2387.</p>
 <p>Miller DL (2021). Bayesian views of generalized additive modelling. arXiv.</p>
 <p>Wood, SN (2016) Just Another Gibbs Additive Modeler: Interfacing JAGS and mgcv. Journal of Statistical Software 75, no. 7</p>
-</div>
-</div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
