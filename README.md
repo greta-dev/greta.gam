@@ -36,25 +36,78 @@ install.packages("greta.gam")
 
 ## Example
 
-Here’s a simple example adapted from the `mgcv` `?gam` help file:
-
-In `mgcv`:
+Here’s a simple example adapted from the `mgcv` `?gam` help file. In
+`mgcv`:
 
 ``` r
 library(mgcv)
 #> Loading required package: nlme
 #> This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.
-set.seed(2)
+set.seed(2024 - 12 - 12)
 
 # simulate some data...
 dat <- gamSim(1, n = 400, dist = "normal", scale = 0.3)
 #> Gu & Wahba 4 term additive model
-
+head(dat)
+#>           y        x0        x1        x2        x3         f       f0       f1
+#> 1  6.189450 0.1965959 0.4034173 0.7343655 0.7300751  5.759744 1.158200 2.240804
+#> 2 11.198472 0.7164260 0.8771072 0.1027748 0.6644855 11.004222 1.555243 5.778906
+#> 3  5.100980 0.3620857 0.4601120 0.8524531 0.9341949  4.681517 1.815195 2.509852
+#> 4  7.441910 0.3910775 0.5848327 0.7292472 0.5560306  7.557107 1.884044 3.220915
+#> 5  7.617724 0.8133072 0.6959593 0.7285362 0.6814503  7.594086 1.106920 4.022560
+#> 6  7.668790 0.4279599 0.3961759 0.5802106 0.3974592  7.235281 1.948997 2.208585
+#>          f2 f3
+#> 1 2.3607405  0
+#> 2 3.6700722  0
+#> 3 0.3564696  0
+#> 4 2.4521485  0
+#> 5 2.4646055  0
+#> 6 3.0776995  0
 # fit a model using gam()
-b <- gam(y ~ s(x2), data = dat)
+mgcv_fit <- gam(y ~ s(x2), data = dat)
+mgcv_fit
+#> 
+#> Family: gaussian 
+#> Link function: identity 
+#> 
+#> Formula:
+#> y ~ s(x2)
+#> 
+#> Estimated degrees of freedom:
+#> 8.04  total = 9.04 
+#> 
+#> GCV score: 3.829468
+summary(mgcv_fit)
+#> 
+#> Family: gaussian 
+#> Link function: identity 
+#> 
+#> Formula:
+#> y ~ s(x2)
+#> 
+#> Parametric coefficients:
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)  8.08745    0.09673    83.6   <2e-16 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Approximate significance of smooth terms:
+#>         edf Ref.df     F p-value    
+#> s(x2) 8.036  8.749 91.18  <2e-16 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> R-sq.(adj) =  0.667   Deviance explained = 67.4%
+#> GCV = 3.8295  Scale est. = 3.743     n = 400
+## show partial residuals
+plot(mgcv_fit, scheme = 1, shift = coef(mgcv_fit)[1])
 ```
 
-Now fitting the same model in `greta`:
+<img src="man/figures/README-mgcv-generate-and-fit-1.png" width="100%" />
+
+Now fitting the same model in `greta`. We first start by setting up the
+linear predictor for the smooth. That is, the right hand side of the
+formula:
 
 ``` r
 library(greta.gam)
@@ -71,40 +124,129 @@ library(greta.gam)
 #>     tapply
 set.seed(2024 - 02 - 09)
 # setup the linear predictor for the smooth
-z <- smooths(~ s(x2), data = dat)
+linear_predictor <- smooths(~ s(x2), data = dat)
 #> ℹ Initialising python and checking dependencies, this may take a moment.
 #> ✔ Initialising python and checking dependencies ... done!               
+linear_predictor
+#> greta array <operation>
+#>       [,1]
+#>  [1,]  ?  
+#>  [2,]  ?  
+#>  [3,]  ?  
+#>  [4,]  ?  
+#>  [5,]  ?  
+#>  [6,]  ?  
+#>  [7,]  ?  
+#>  [8,]  ?  
+#>  [9,]  ?  
+#> [10,]  ?
+#> 
+#> ℹ 390 more values
+#> Use `print(n = ...)` to see more values
+```
 
-# set the distribution of the response
-distribution(dat$y) <- normal(z, 1)
+Now we specify the distribution of the response:
 
-# make some prediction data
-pred_dat <- data.frame(x2 = seq(0, 1, length.out = 100))
+``` r
+distribution(dat$y) <- normal(mean = linear_predictor, sd = 1)
+```
 
-# z_pred stores the predictions
-z_pred <- evaluate_smooths(z, newdata = pred_dat)
+Now let’s make some prediction data
 
+``` r
+pred_dat <- data.frame(
+  x2 = seq(0, 1, length.out = 100)
+  )
+
+head(pred_dat)
+#>           x2
+#> 1 0.00000000
+#> 2 0.01010101
+#> 3 0.02020202
+#> 4 0.03030303
+#> 5 0.04040404
+#> 6 0.05050505
+```
+
+We run `evaluate_smooths` on the linear predicting with the new
+prediction data
+
+``` r
+linear_preds <- evaluate_smooths(linear_predictor, newdata = pred_dat)
+linear_preds
+#> greta array <operation>
+#> 
+#>       [,1]
+#>  [1,]  ?  
+#>  [2,]  ?  
+#>  [3,]  ?  
+#>  [4,]  ?  
+#>  [5,]  ?  
+#>  [6,]  ?  
+#>  [7,]  ?  
+#>  [8,]  ?  
+#>  [9,]  ?  
+#> [10,]  ?
+#> 
+#> ℹ 90 more values
+#> Use `print(n = ...)` to see more values
+```
+
+Now we specify that as a model object and then fit with MCMC as we do
+with greta normally:
+
+``` r
 # build model
-m <- model(z_pred)
-
+m <- model(linear_preds)
+m
+#> greta model
 # draw from the posterior
-draws <- mcmc(m, n_samples = 200)
-#> running 4 chains simultaneously on up to 8 CPU cores
-#>     warmup                                           0/1000 | eta:  ?s              warmup ==                                       50/1000 | eta: 29s              warmup ====                                    100/1000 | eta: 16s              warmup ======                                  150/1000 | eta: 11s              warmup ========                                200/1000 | eta:  9s              warmup ==========                              250/1000 | eta:  7s              warmup ===========                             300/1000 | eta:  6s              warmup =============                           350/1000 | eta:  5s              warmup ===============                         400/1000 | eta:  5s              warmup =================                       450/1000 | eta:  4s              warmup ===================                     500/1000 | eta:  4s              warmup =====================                   550/1000 | eta:  3s              warmup =======================                 600/1000 | eta:  3s              warmup =========================               650/1000 | eta:  2s              warmup ===========================             700/1000 | eta:  2s              warmup ============================            750/1000 | eta:  2s              warmup ==============================          800/1000 | eta:  1s              warmup ================================        850/1000 | eta:  1s              warmup ==================================      900/1000 | eta:  1s              warmup ====================================    950/1000 | eta:  0s              warmup ====================================== 1000/1000 | eta:  0s          
-#>   sampling                                            0/200 | eta:  ?s            sampling ==========                                50/200 | eta:  0s            sampling ===================                      100/200 | eta:  0s            sampling ============================             150/200 | eta:  0s            sampling ======================================   200/200 | eta:  0s
+draws <- mcmc(m, n_samples = 200, verbose = FALSE)
+class(draws)
+#> [1] "greta_mcmc_list" "mcmc.list"
+# 4 chains
+length(draws)
+#> [1] 4
 
-# plot the mgcv fit
-plot(b, scheme = 1, shift = coef(b)[1])
+# 200 draws, 100 predictors
+dim(draws[[1]])
+#> [1] 200 100
+
+# look at the top corner
+draws[[1]][1:5, 1:5]
+#>   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]
+#> 1          3.584717          3.965028          4.346026          4.729800
+#> 2          3.685425          4.068849          4.452934          4.839685
+#> 3          3.685425          4.068849          4.452934          4.839685
+#> 4          3.461360          3.880266          4.299797          4.721838
+#> 5          3.597318          4.008570          4.420449          4.834854
+#>   linear_preds[5,1]
+#> 1          5.120307
+#> 2          5.232892
+#> 3          5.232892
+#> 4          5.149939
+#> 5          5.255362
+```
+
+Now let’s compare the `mgcv` model fit to the `greta.gam` fit:
+
+``` r
+plot(mgcv_fit, scheme = 1, shift = coef(mgcv_fit)[1])
 
 # add in a line for each posterior sample
-apply(draws[[1]], 1, lines, x = pred_dat$x2, col = "blue")
+apply(draws[[1]], 1, lines, x = pred_dat$x2, 
+      col = adjustcolor("firebrick", alpha.f = 0.1))
 #> NULL
 
 # plot the data
 points(dat$x2, dat$y, pch = 19, cex = 0.2)
 ```
 
-<img src="man/figures/README-greta-fit-1.png" width="100%" />
+<img src="man/figures/README-greta-fit-show-preds-1.png" width="100%" />
+
+The `mgcv` predictions are in the grey ribbon, and the `greta.gam` ones
+are in red - we can see that the greta predictions are within the range
+of the mgcv, which is good news!
 
 ## Brief technical details
 
@@ -131,7 +273,7 @@ improper prior. We take the option provided by `jagam` and create an
 additional penalty matrix for these terms (from an eigen-decomposition
 of the penalty matrix; see Marra & Wood, 2011).
 
-### References
+# References
 
 Marra, G and Wood, SN (2011) Practical variable selection for
 generalized additive models. Computational Statistics and Data Analysis,
