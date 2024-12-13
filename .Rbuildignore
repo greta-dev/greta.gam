@@ -10,3 +10,4 @@ figure/
 ^codemeta\.json$
 ^cran-comments\.md$
 ^LICENSE\.md$
+^CRAN-SUBMISSION$
