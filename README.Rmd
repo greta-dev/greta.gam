@@ -70,7 +70,8 @@ linear_predictor
 Now we specify the distribution of the response:
 
 ```{r greta-fit-add-distribution}
-distribution(dat$y) <- normal(mean = linear_predictor, sd = 1)
+dist_sd <- cauchy(0, 1, truncation = c(0, Inf))
+distribution(dat$y) <- normal(mean = linear_predictor, sd = dist_sd)
 ```
 
 Now let's make some prediction data

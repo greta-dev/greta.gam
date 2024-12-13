@@ -148,7 +148,8 @@ linear_predictor
 Now we specify the distribution of the response:
 
 ``` r
-distribution(dat$y) <- normal(mean = linear_predictor, sd = 1)
+dist_sd <- cauchy(0, 1, truncation = c(0, Inf))
+distribution(dat$y) <- normal(mean = linear_predictor, sd = dist_sd)
 ```
 
 Now let’s make some prediction data
@@ -215,17 +216,17 @@ dim(draws[[1]])
 # look at the top corner
 draws[[1]][1:5, 1:5]
 #>   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]
-#> 1          3.584717          3.965028          4.346026          4.729800
-#> 2          3.685425          4.068849          4.452934          4.839685
-#> 3          3.685425          4.068849          4.452934          4.839685
-#> 4          3.461360          3.880266          4.299797          4.721838
-#> 5          3.597318          4.008570          4.420449          4.834854
+#> 1          2.820715          3.423075          4.025365          4.627335
+#> 2          3.013640          3.578321          4.142931          4.707219
+#> 3          3.209931          3.745096          4.280535          4.817052
+#> 4          3.297851          3.801321          4.305055          4.809836
+#> 5          3.058942          3.557204          4.055727          4.555285
 #>   linear_preds[5,1]
-#> 1          5.120307
-#> 2          5.232892
-#> 3          5.232892
-#> 4          5.149939
-#> 5          5.255362
+#> 1          5.228422
+#> 2          5.270628
+#> 3          5.356083
+#> 4          5.317095
+#> 5          5.057305
 ```
 
 Now let’s compare the `mgcv` model fit to the `greta.gam` fit:
