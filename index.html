@@ -173,7 +173,8 @@
 <span><span class="co">#&gt; Use `print(n = ...)` to see more values</span></span></code></pre></div>
 <p>Now we specify the distribution of the response:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://greta-stats.org/reference/distribution.html" class="external-link">distribution</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/distributions.html" class="external-link">normal</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">linear_predictor</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dist_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/distributions.html" class="external-link">cauchy</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, truncation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://greta-stats.org/reference/distribution.html" class="external-link">distribution</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://greta-stats.org/reference/distributions.html" class="external-link">normal</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">linear_predictor</span>, sd <span class="op">=</span> <span class="va">dist_sd</span><span class="op">)</span></span></code></pre></div>
 <p>Now let’s make some prediction data</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -229,17 +230,17 @@
 <span><span class="co"># look at the top corner</span></span>
 <span><span class="va">draws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
 <span><span class="co">#&gt;   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]</span></span>
-<span><span class="co">#&gt; 1          3.584717          3.965028          4.346026          4.729800</span></span>
-<span><span class="co">#&gt; 2          3.685425          4.068849          4.452934          4.839685</span></span>
-<span><span class="co">#&gt; 3          3.685425          4.068849          4.452934          4.839685</span></span>
-<span><span class="co">#&gt; 4          3.461360          3.880266          4.299797          4.721838</span></span>
-<span><span class="co">#&gt; 5          3.597318          4.008570          4.420449          4.834854</span></span>
+<span><span class="co">#&gt; 1          2.820715          3.423075          4.025365          4.627335</span></span>
+<span><span class="co">#&gt; 2          3.013640          3.578321          4.142931          4.707219</span></span>
+<span><span class="co">#&gt; 3          3.209931          3.745096          4.280535          4.817052</span></span>
+<span><span class="co">#&gt; 4          3.297851          3.801321          4.305055          4.809836</span></span>
+<span><span class="co">#&gt; 5          3.058942          3.557204          4.055727          4.555285</span></span>
 <span><span class="co">#&gt;   linear_preds[5,1]</span></span>
-<span><span class="co">#&gt; 1          5.120307</span></span>
-<span><span class="co">#&gt; 2          5.232892</span></span>
-<span><span class="co">#&gt; 3          5.232892</span></span>
-<span><span class="co">#&gt; 4          5.149939</span></span>
-<span><span class="co">#&gt; 5          5.255362</span></span></code></pre></div>
+<span><span class="co">#&gt; 1          5.228422</span></span>
+<span><span class="co">#&gt; 2          5.270628</span></span>
+<span><span class="co">#&gt; 3          5.356083</span></span>
+<span><span class="co">#&gt; 4          5.317095</span></span>
+<span><span class="co">#&gt; 5          5.057305</span></span></code></pre></div>
 <p>Now let’s compare the <code>mgcv</code> model fit to the <code>greta.gam</code> fit:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mgcv_fit</span>, scheme <span class="op">=</span> <span class="fl">1</span>, shift <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mgcv_fit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
