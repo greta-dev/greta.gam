@@ -10,6 +10,8 @@
 #' @return a `list` with the following elements: `betas` a greta array for
 #'   the coefficients to be estimated (with appropriate priors applied), `X`
 #'   design matrix for this model, `X_pred` prediction matrix.
+#' @keywords internal
+#' @noRd
 #' @examples
 #' \dontrun{
 #' n <- 30

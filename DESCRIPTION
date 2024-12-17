@@ -24,20 +24,17 @@ Authors@R: c(
       email = "dave@ninepointeightone.net"
       )
       )
-Description: A module for greta (Golding (2019) <doi:10.21105/joss.01601>) that 
-    lets you use the 'mgcv' smoother functions and formula syntax to define 
-    smooth terms for use in a greta model. You can then define your own 
-    likelihood to complete the model, and fit it by MCMC. 
+Description: A 'greta' (Golding (2019) <doi:10.21105/joss.01601>) module that lets you use 'mgcv' smoother functions and formula syntax to define smooth terms for use in a 'greta' model. You can then define your own likelihood to complete the model, and fit it by Markov Chain Monte Carlo (MCMC).
 License: Apache License (>= 2)
-Imports: 
+Imports:
     cli,
     mgcv,
     rlang,
     stats
-Depends: 
+Depends:
   greta (>= 0.5.0),
   R (>= 4.1.0)
-Suggests: 
+Suggests:
     knitr,
     rmarkdown,
     spelling,
