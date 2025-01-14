@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/greta-dev/greta.gam/branch/main/graph/badge.svg)](https://app.codecov.io/gh/greta-dev/greta.gam?branch=main)
+[![codecov](https://codecov.io/gh/greta-dev/greta.gam/graph/badge.svg?token=FGPkO7aJ9p)](https://codecov.io/gh/greta-dev/greta.gam)
+[![CRAN status](https://www.r-pkg.org/badges/version/greta.gam)](https://CRAN.R-project.org/package=greta.gam)
 <!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)'s smoother functions and formula syntax to define smooth terms for use in a [greta](https://greta-stats.org/) model. You can then define your own likelihood to complete the model, and fit it by MCMC. 
@@ -26,16 +27,16 @@ The design and architecture of the package was done by [Nick Golding](https://gi
 
 # Installation
 
-You can install the development version of `greta.gam` from the [R-universe](https://greta-dev.r-universe.dev/greta.gam) with:
-
-```{r install, eval = FALSE}
-install.packages("greta.gam", repos = c("https://greta-dev.r-universe.dev", "https://cloud.r-project.org"))
-```
-
-Or you can install from CRAN with:
+You can install `greta.gam` from CRAN with:
 
 ```{r install-cran, eval = FALSE}
 install.packages("greta.gam")
+```
+
+Or, you can install the development version of `greta.gam` from the [R-universe](https://greta-dev.r-universe.dev/greta.gam) with:
+
+```{r install, eval = FALSE}
+install.packages("greta.gam", repos = c("https://greta-dev.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Example

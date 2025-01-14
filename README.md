@@ -6,8 +6,9 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/greta-dev/greta.gam/branch/main/graph/badge.svg)](https://app.codecov.io/gh/greta-dev/greta.gam?branch=main)
+[![codecov](https://codecov.io/gh/greta-dev/greta.gam/graph/badge.svg?token=FGPkO7aJ9p)](https://codecov.io/gh/greta-dev/greta.gam)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/greta.gam)](https://CRAN.R-project.org/package=greta.gam)
 <!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)’s
@@ -21,17 +22,17 @@ Miller](https://github.com/dill).
 
 # Installation
 
-You can install the development version of `greta.gam` from the
+You can install `greta.gam` from CRAN with:
+
+``` r
+install.packages("greta.gam")
+```
+
+Or, you can install the development version of `greta.gam` from the
 [R-universe](https://greta-dev.r-universe.dev/greta.gam) with:
 
 ``` r
 install.packages("greta.gam", repos = c("https://greta-dev.r-universe.dev", "https://cloud.r-project.org"))
-```
-
-Or you can install from CRAN with:
-
-``` r
-install.packages("greta.gam")
 ```
 
 ## Example
@@ -216,17 +217,17 @@ dim(draws[[1]])
 # look at the top corner
 draws[[1]][1:5, 1:5]
 #>   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]
-#> 1          2.820715          3.423075          4.025365          4.627335
-#> 2          3.013640          3.578321          4.142931          4.707219
-#> 3          3.209931          3.745096          4.280535          4.817052
-#> 4          3.297851          3.801321          4.305055          4.809836
-#> 5          3.058942          3.557204          4.055727          4.555285
+#> 1          3.485601          3.930843          4.376445          4.823490
+#> 2          3.485601          3.930843          4.376445          4.823490
+#> 3          3.232631          3.691915          4.151572          4.612721
+#> 4          4.030482          4.416187          4.802303          5.190072
+#> 5          3.758159          4.151049          4.544375          4.939461
 #>   linear_preds[5,1]
-#> 1          5.228422
-#> 2          5.270628
-#> 3          5.356083
-#> 4          5.317095
-#> 5          5.057305
+#> 1          5.274006
+#> 2          5.274006
+#> 3          5.077465
+#> 4          5.581841
+#> 5          5.338827
 ```
 
 Now let’s compare the `mgcv` model fit to the `greta.gam` fit:
