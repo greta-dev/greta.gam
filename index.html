@@ -63,12 +63,12 @@
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
-<p>You can install the development version of <code>greta.gam</code> from the <a href="https://greta-dev.r-universe.dev/greta.gam" class="external-link">R-universe</a> with:</p>
+<p>You can install <code>greta.gam</code> from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"greta.gam"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://greta-dev.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Or you can install from CRAN with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"greta.gam"</span><span class="op">)</span></span></code></pre></div>
+<p>Or, you can install the development version of <code>greta.gam</code> from the <a href="https://greta-dev.r-universe.dev/greta.gam" class="external-link">R-universe</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"greta.gam"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://greta-dev.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
@@ -230,17 +230,17 @@
 <span><span class="co"># look at the top corner</span></span>
 <span><span class="va">draws</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
 <span><span class="co">#&gt;   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]</span></span>
-<span><span class="co">#&gt; 1          2.820715          3.423075          4.025365          4.627335</span></span>
-<span><span class="co">#&gt; 2          3.013640          3.578321          4.142931          4.707219</span></span>
-<span><span class="co">#&gt; 3          3.209931          3.745096          4.280535          4.817052</span></span>
-<span><span class="co">#&gt; 4          3.297851          3.801321          4.305055          4.809836</span></span>
-<span><span class="co">#&gt; 5          3.058942          3.557204          4.055727          4.555285</span></span>
+<span><span class="co">#&gt; 1          3.485601          3.930843          4.376445          4.823490</span></span>
+<span><span class="co">#&gt; 2          3.485601          3.930843          4.376445          4.823490</span></span>
+<span><span class="co">#&gt; 3          3.232631          3.691915          4.151572          4.612721</span></span>
+<span><span class="co">#&gt; 4          4.030482          4.416187          4.802303          5.190072</span></span>
+<span><span class="co">#&gt; 5          3.758159          4.151049          4.544375          4.939461</span></span>
 <span><span class="co">#&gt;   linear_preds[5,1]</span></span>
-<span><span class="co">#&gt; 1          5.228422</span></span>
-<span><span class="co">#&gt; 2          5.270628</span></span>
-<span><span class="co">#&gt; 3          5.356083</span></span>
-<span><span class="co">#&gt; 4          5.317095</span></span>
-<span><span class="co">#&gt; 5          5.057305</span></span></code></pre></div>
+<span><span class="co">#&gt; 1          5.274006</span></span>
+<span><span class="co">#&gt; 2          5.274006</span></span>
+<span><span class="co">#&gt; 3          5.077465</span></span>
+<span><span class="co">#&gt; 4          5.581841</span></span>
+<span><span class="co">#&gt; 5          5.338827</span></span></code></pre></div>
 <p>Now let’s compare the <code>mgcv</code> model fit to the <code>greta.gam</code> fit:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mgcv_fit</span>, scheme <span class="op">=</span> <span class="fl">1</span>, shift <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mgcv_fit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -323,7 +323,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/greta-dev/greta.gam?branch=main" class="external-link"><img src="https://codecov.io/gh/greta-dev/greta.gam/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://codecov.io/gh/greta-dev/greta.gam" class="external-link"><img src="https://codecov.io/gh/greta-dev/greta.gam/graph/badge.svg?token=FGPkO7aJ9p" alt="codecov"></a></li>
 </ul>
 </div>
 
