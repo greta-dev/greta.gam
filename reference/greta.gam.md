@@ -22,9 +22,6 @@ Useful links:
 
 Authors:
 
-- Nicholas Tierney <nicholas.tierney@gmail.com>
-  ([ORCID](https://orcid.org/0000-0003-1460-8722))
-
 - Nick Golding <nick.golding.research@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-8916-5570)) \[copyright holder\]
 
