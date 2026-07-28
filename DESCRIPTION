@@ -1,7 +1,7 @@
 Package: greta.gam
 Type: Package
 Title: Generalised Additive Models in 'greta' using 'mgcv'
-Version: 0.2.0.9000
+Version: 0.2.1
 Authors@R: c(
     person(
       given = "Nick", 
@@ -32,7 +32,7 @@ Imports:
     rlang,
     stats
 Depends:
-  greta (>= 0.5.0),
+  greta (>= 0.6.0),
   R (>= 4.1.0)
 Suggests:
     knitr,
@@ -41,10 +41,11 @@ Suggests:
     testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
 Config/testthat/edition: 3
+Config/Needs/website: greta-dev/greta.pkgdown
 URL: https://github.com/greta-dev/greta.gam, https://greta-dev.github.io/greta.gam/
 BugReports: https://github.com/greta-dev/greta.gam/issues
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Language: en-GB
+Config/roxygen2/version: 8.0.0

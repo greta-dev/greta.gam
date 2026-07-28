@@ -1,4 +1,54 @@
 url: https://greta-dev.github.io/greta.gam/
-template:
-  bootstrap: 5
 
+development:
+  mode: auto
+
+template:
+  package: greta.pkgdown
+  bootstrap: 5
+  # greta.pkgdown's shared default points at `man/figures/name_icon_on_purple.png`,
+  # which only greta itself ships. We serve the same image from `pkgdown/assets/`
+  # (copied to the site root) instead.
+  opengraph:
+    image:
+      src: name_icon_on_purple.png
+      alt: "greta.gam"
+
+home:
+  # The shared greta SCSS hides the home-page sidebar and lets content span the
+  # full width, so turn the sidebar off here to match.
+  sidebar: false
+  title: greta.gam — generalised additive models in greta using mgcv
+  description: >
+    greta.gam lets you use mgcv's smoother functions and formula syntax to
+    define smooth terms for use in a greta model. You can then define your own
+    likelihood to complete the model, and fit it by MCMC.
+
+navbar:
+  structure:
+    left: [get-started, reference, news]
+  components:
+    get-started:
+      text: get started
+      href: articles/getting-started.html
+    reference:
+      text: docs
+      href: reference/index.html
+
+reference:
+  - title: Smooth terms
+    desc: >
+      Build greta arrays representing mgcv smooth terms, and evaluate them at
+      new data.
+    contents:
+      - smooths
+      - evaluate_smooths
+
+  - title: Package
+    contents:
+      - greta.gam
+
+articles:
+  - title: Get started
+    contents:
+      - getting-started

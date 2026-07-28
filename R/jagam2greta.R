@@ -91,7 +91,7 @@ jagam2greta <- function(formula,
     assign(
       paste0("b", Ktosolve[i]),
       t(multivariate_normal(
-        zeros(1, jags_stuff$pregam$smooth[[1]]$df),
+        zeros(1, jags_stuff$pregam$smooth[[i]]$df),
         get(thisK)
       ))
     )

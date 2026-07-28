@@ -6,15 +6,15 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/greta-dev/greta.gam/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/greta-dev/greta.gam/graph/badge.svg?token=FGPkO7aJ9p)](https://codecov.io/gh/greta-dev/greta.gam)
+[![codecov](https://codecov.io/gh/greta-dev/greta.gam/graph/badge.svg?token=FGPkO7aJ9p)](https://app.codecov.io/gh/greta-dev/greta.gam)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/greta.gam)](https://CRAN.R-project.org/package=greta.gam)
 <!-- badges: end -->
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)’s
 smoother functions and formula syntax to define smooth terms for use in
-a [greta](https://greta-stats.org/) model. You can then define your own
-likelihood to complete the model, and fit it by MCMC.
+a [greta](https://greta-dev.github.io/greta/) model. You can then define
+your own likelihood to complete the model, and fit it by MCMC.
 
 The design and architecture of the package was done by [Nick
 Golding](https://github.com/goldingn), and [David L
@@ -43,7 +43,7 @@ Here’s a simple example adapted from the `mgcv` `?gam` help file. In
 ``` r
 library(mgcv)
 #> Loading required package: nlme
-#> This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.
+#> This is mgcv 1.9-4. For overview type '?mgcv'.
 set.seed(2024 - 12 - 12)
 
 # simulate some data...
@@ -104,7 +104,7 @@ summary(mgcv_fit)
 plot(mgcv_fit, scheme = 1, shift = coef(mgcv_fit)[1])
 ```
 
-<img src="man/figures/README-mgcv-generate-and-fit-1.png" width="100%" />
+<img src="man/figures/README-mgcv-generate-and-fit-1.png" alt="" width="100%" />
 
 Now fitting the same model in `greta`. We first start by setting up the
 linear predictor for the smooth. That is, the right hand side of the
@@ -120,14 +120,15 @@ library(greta.gam)
 #>     binomial, cov2cor, poisson
 #> The following objects are masked from 'package:base':
 #> 
-#>     %*%, apply, backsolve, beta, chol2inv, colMeans, colSums, diag,
-#>     eigen, forwardsolve, gamma, identity, rowMeans, rowSums, sweep,
-#>     tapply
+#>     %*%, %o%, apply, backsolve, beta, chol2inv, colMeans, colSums,
+#>     diag, eigen, forwardsolve, gamma, identity, outer, rowMeans,
+#>     rowSums, sweep, tapply
 set.seed(2024 - 02 - 09)
 # setup the linear predictor for the smooth
 linear_predictor <- smooths(~ s(x2), data = dat)
 #> ℹ Initialising python and checking dependencies, this may take a moment.
-#> ✔ Initialising python and checking dependencies ... done!               
+#> ✔ Initialising python and checking dependencies ... done!
+#> 
 linear_predictor
 #> greta array <operation>
 #>       [,1]
@@ -208,7 +209,7 @@ class(draws)
 #> [1] "greta_mcmc_list" "mcmc.list"
 # 4 chains
 length(draws)
-#> [1] 4
+#> [1] 2
 
 # 200 draws, 100 predictors
 dim(draws[[1]])
@@ -216,18 +217,18 @@ dim(draws[[1]])
 
 # look at the top corner
 draws[[1]][1:5, 1:5]
-#>   linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]
-#> 1          3.485601          3.930843          4.376445          4.823490
-#> 2          3.485601          3.930843          4.376445          4.823490
-#> 3          3.232631          3.691915          4.151572          4.612721
-#> 4          4.030482          4.416187          4.802303          5.190072
-#> 5          3.758159          4.151049          4.544375          4.939461
-#>   linear_preds[5,1]
-#> 1          5.274006
-#> 2          5.274006
-#> 3          5.077465
-#> 4          5.581841
-#> 5          5.338827
+#>      linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]
+#> [1,]          2.566217          3.154061          3.741883          4.329583
+#> [2,]          3.167897          3.706806          4.245812          4.785186
+#> [3,]          3.114580          3.603198          4.092060          4.581885
+#> [4,]          3.803421          4.221817          4.640559          5.060695
+#> [5,]          3.638467          4.082852          4.527529          4.973375
+#>      linear_preds[5,1]
+#> [1,]          4.916877
+#> [2,]          5.325357
+#> [3,]          5.073983
+#> [4,]          5.484197
+#> [5,]          5.422027
 ```
 
 Now let’s compare the `mgcv` model fit to the `greta.gam` fit:
@@ -244,7 +245,7 @@ apply(draws[[1]], 1, lines, x = pred_dat$x2,
 points(dat$x2, dat$y, pch = 19, cex = 0.2)
 ```
 
-<img src="man/figures/README-greta-fit-show-preds-1.png" width="100%" />
+<img src="man/figures/README-greta-fit-show-preds-1.png" alt="" width="100%" />
 
 The `mgcv` predictions are in the grey ribbon, and the `greta.gam` ones
 are in red - we can see that the greta predictions are within the range
