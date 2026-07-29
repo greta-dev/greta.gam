@@ -2,8 +2,8 @@
 
 greta.gam lets you use [mgcv](https://CRAN.R-project.org/package=mgcv)’s
 smoother functions and formula syntax to define smooth terms for use in
-a [greta](https://greta-stats.org/) model. You can then define your own
-likelihood to complete the model, and fit it by MCMC.
+a [greta](https://greta-dev.github.io/greta/) model. You can then define
+your own likelihood to complete the model, and fit it by MCMC.
 
 The design and architecture of the package was done by [Nick
 Golding](https://github.com/goldingn), and [David L
@@ -261,17 +261,17 @@ draws[[1]][1:5, 1:5]
 ```
 
     ##      linear_preds[1,1] linear_preds[2,1] linear_preds[3,1] linear_preds[4,1]
-    ## [1,]          2.981611          3.426881          3.872861          4.321685
-    ## [2,]          2.820243          3.317056          3.814535          4.314674
-    ## [3,]          3.145150          3.677542          4.210257          4.744239
-    ## [4,]          3.157830          3.662884          4.168167          4.674354
-    ## [5,]          3.038377          3.579211          4.120339          4.662628
+    ## [1,]          2.876368          3.368958          3.861778          4.355517
+    ## [2,]          3.480680          3.942423          4.404441          4.867552
+    ## [3,]          3.293551          3.800072          4.306735          4.813958
+    ## [4,]          3.625533          4.092473          4.559498          5.026855
+    ## [5,]          3.696086          4.165150          4.634338          5.104012
     ##      linear_preds[5,1]
-    ## [1,]          4.777368
-    ## [2,]          4.821197
-    ## [3,]          5.281210
-    ## [4,]          5.182670
-    ## [5,]          5.207662
+    ## [1,]          4.851460
+    ## [2,]          5.333286
+    ## [3,]          5.322498
+    ## [4,]          5.494993
+    ## [5,]          5.574831
 
 Now let’s compare the `mgcv` model fit to the `greta.gam` fit:
 
